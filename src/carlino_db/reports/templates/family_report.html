@@ -1,0 +1,89 @@
+{% import "partials/parent.html.jinja" as parent_template %}
+{% import "partials/child.html.jinja" as child_template %}
+{% import "partials/statistics.jinja" as statistics_template %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="report.css">
+
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
+        <title>{{ vm.title }}</title>
+    </head>
+
+    <body>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1>{{ vm.title }}</h1>
+                    {% if vm.subtitle %}
+                        <div class="subtitle">{{ vm.subtitle }}</div>
+                    {% endif %}
+                </div>
+                <div class="col-6 text-end">
+                    {% if vm.created_at %}
+                        <div class="created-at">Generated on: {{ vm.created_at.strftime("%Y-%m-%d %H:%M") }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        {% if vm.statistics %}
+            <div class="container-fluid">
+                <h2>Statistics</h2>
+                {{ statistics_template.render_statistics(vm.statistics) }}
+            </div>
+        {% endif %}
+
+        <div class="container-fluid">
+            <h2>Families Catalog</h2>
+        </div>
+
+        {% for family in vm.families %}
+        <div class="family-block container-fluid">
+
+            <h2>Family {{ family.id }}</h2>
+
+            <div class="section row">
+                <div class="col-6">
+                    <h3>Mother</h3>
+                    {% if family.mother %}
+                        {{ parent_template.render_parent(family.mother) }}
+                    {% else %}
+                        <div class="empty">Mother not available</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-6">
+                    <h3>Father</h3>
+                    {% if family.father %}
+                        {{ parent_template.render_parent(family.father) }}
+                    {% else %}
+                        <div class="empty">Father not available</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if family.children %}
+                <div class="section">
+                    <h3>Children</h3>
+
+                    {% for child in family.children %}
+                        {{ child_template.render_child(child) }}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty">No children recorded</div>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+
+    </body>
+</html>

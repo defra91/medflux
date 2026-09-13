@@ -1,0 +1,49 @@
+{% import "partials/kv_item.html.jinja" as kv %}
+
+{% macro render_parent(p) %}
+<div>
+    <div>
+        <span class="label">Mutation: </span> 
+        {{ p.mutation or "N/A" }}
+    </div>
+
+    <div>
+        <span class="label">Symptoms: </span>
+
+        <div class="row">
+            <div class="col-6">
+                <ul>
+                    {{ kv.kv_item("Recurrent fever", p.recurrent_fever | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("T Max", p.temperature_category, "text-end") }}
+                    {{ kv.kv_item("Episode duration", p.episode_duration | days, "text-end") }}
+                    {{ kv.kv_item("Abdominal pain", p.abdominal_pain | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Chest pain", p.chest_pain | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Headache", p.headache | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Osteoarticular pain", p.osteoarticular_pain | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Aphthosis with fever", p.aphthosis_with_fever | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Aphthosis without fever", p.aphthosis_without_fever | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Erythematous tonsillitis", p.erythematous_tonsillitis | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Exudative tonsillitis", p.exudative_tonsillitis | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Cutaneous manifestations", p.cutaneous_manifestations | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Asthenia", p.asthenia | yes_no_check | safe, "text-end") }}
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul>
+                    {{ kv.kv_item("Respiratory infections (chronic)", p.respiratory_infections_chronic | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Fever in adulthood", p.fever_in_adulthood | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Family amyloidosis", p.family_amyloidosis | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Onset before 18", p.onset_before_18 | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Onset after 18", p.onset_after_18 | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Episodes per year", p.episodes_per_year, "text-end") }}
+                    {{ kv.kv_item("Tonsillectomy", p.tonsillectomy | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Appendicectomy", p.appendicectomy | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Improvement in adulthood", p.improvement_in_adulthood | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Family respiratory infections (chronic)", p.family_respiratory_infections_chronic | yes_no_check | safe, "text-end") }}
+                    {{ kv.kv_item("Consanguinity", p.consanguinity | yes_no_check | safe, "text-end") }}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

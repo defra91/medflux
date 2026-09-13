@@ -1,6 +1,6 @@
 from ..domain.child import Child
 from ..models.patient_record import PatientRecord
-from .base_mappers import map_gender, map_country, map_str, map_int, map_boolean, map_mutation, map_fever_trigger, map_float, map_optional_bool, map_temperature_category, map_episode_duration, map_abdominal_surgery, map_mucocutaneous, map_therapy_response, map_collateral_effects, map_amyloidosis
+from .base_mappers import map_gender, map_country, map_str, map_int, map_boolean, map_mutation, map_fever_trigger, map_float, map_optional_bool, map_temperature_category, map_episode_duration, map_abdominal_surgery, map_mucocutaneous, map_therapy_response, map_collateral_effects, map_amyloidosis, map_family_id
 
 def map_child(patient_record: PatientRecord) -> Child:
     """
@@ -10,7 +10,7 @@ def map_child(patient_record: PatientRecord) -> Child:
     return Child(
         # Identifiers
         centre_id=map_str(patient_record.centre_id),
-        family_id=map_str(patient_record.family_id),
+        family_id=map_family_id(patient_record.family_id),
         eurofever_id=map_str(patient_record.id_eurofever),
 
         # Demographics

@@ -1,0 +1,22 @@
+{% macro render_statistics(s) %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Total Families</th>
+                <td class="text-end">{{ s.total_families }}</td>
+            </tr>
+            <tr>
+                <th>Total Children</th>
+                <td class="text-end">{{ s.total_children }}</td>
+            </tr>
+            <tr>
+                <th>Average Children per Family</th>
+                <td class="text-end">{{ s.avg_children_per_family | format_float }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="container-fluid">
+
+{% endmacro %}

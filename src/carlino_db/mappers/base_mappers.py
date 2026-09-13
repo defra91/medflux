@@ -351,3 +351,18 @@ def map_amyloidosis(raw: str | None) -> Amyloidosis:
         return Amyloidosis.DIARRHEA_RETROSTERNAL_HEARTBURN_WEIGHT_LOSS
 
     return Amyloidosis.UNKNOWN
+
+
+def map_family_id(raw_id: str | None) -> str | None:
+    if raw_id is None:
+        return None
+
+    if "-" not in raw_id:
+        return raw_id
+
+    base, suffix = raw_id.rsplit("-", 1)
+
+    if suffix in {"P", "M", "F", "P1", "P2", "P3"}:
+        return base
+
+    return raw_id
