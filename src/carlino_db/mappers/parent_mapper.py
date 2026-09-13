@@ -1,7 +1,7 @@
 from ..domain.parent import Parent
 from ..models.family_record import FamilyRecord
 from ..domain.parental_role import ParentalRole
-from .base_mappers import map_boolean, map_temperature_category, map_episode_duration, map_int, map_parental_role
+from .base_mappers import map_str, map_boolean, map_temperature_category, map_episode_duration, map_int, map_parental_role
 
 
 def map_parent(family_record: FamilyRecord) -> Parent:
@@ -9,9 +9,9 @@ def map_parent(family_record: FamilyRecord) -> Parent:
     Maps a FamilyRecord instance to a Parent domain model instance.
     """
 
-    family_id = family_record.family_id
+    family_id = map_str(family_record.family_id)
     parental_role = map_parental_role(family_record.padre_madre)
-    mutation = family_record.mutazione
+    mutation = map_str(family_record.mutazione)
     recurrent_fever = map_boolean(family_record.febbre_ricorrente)
     temperature_category = map_temperature_category(family_record.t_max)
     episode_duration = map_episode_duration(family_record.durata)

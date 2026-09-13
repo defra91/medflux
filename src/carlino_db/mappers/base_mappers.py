@@ -6,7 +6,11 @@ from ..domain.country import Country
 from ..domain.mutation import Mutation
 from ..domain.fever_trigger import FeverTrigger
 from ..domain.optional_bool import OptionalBool
-
+from ..domain.abdominal_surgery import AbdominalSurgery
+from ..domain.mucocutaneous import Mucocutaneous
+from ..domain.therapy_response import TherapyResponse
+from ..domain.collateral_effects import CollateralEffects
+from ..domain.amyloidosis import Amyloidosis
 
 def map_str(raw: str | None) -> str | None:
     if raw is None:
@@ -182,7 +186,168 @@ def map_fever_trigger(raw: str | None) -> FeverTrigger:
     if raw is None:
         return FeverTrigger.UNKNOWN
     s = raw.strip().upper()
+
+    if s in ("NC", "N.C.", "N/A", "NA", ""):
+        return FeverTrigger.NC
+
+    if s in ("NO", "N", "NONE"):
+        return FeverTrigger.NO
+
+    if s in ("MESTRUAZIONE", "MESTRUAZIONI", "MENSTRUATION", "MENSTRUATIONS"):
+        return FeverTrigger.MENSTRUATION
+
     for t in FeverTrigger:
         if t.value == s:
             return t
     return FeverTrigger.UNKNOWN
+
+
+def map_abdominal_surgery(raw: str | None) -> AbdominalSurgery:
+    if raw is None:
+        return AbdominalSurgery.NONE
+
+    s = raw.strip().upper()
+
+    if s in ("NO", "N", "", "NONE"):
+        return AbdominalSurgery.NONE
+
+    parts = [p.strip() for p in s.split(",") if p.strip()]
+
+    if parts == ["APPENDICECTOMIA"]:
+        return AbdominalSurgery.APPENDICECTOMY
+
+    if parts == ["COLECISTECTOMIA"]:
+        return AbdominalSurgery.CHOLECYSTECTOMY
+
+    if set(parts) == {"APPENDICECTOMIA", "COLECISTECTOMIA"}:
+        return AbdominalSurgery.APPENDICECTOMY_AND_CHOLECYSTECTOMY
+
+    # Qualsiasi altro valore
+    return AbdominalSurgery.UNKNOWN
+
+
+def normalize_mucocutaneous_token(token: str) -> str:
+    t = token.strip().upper()
+
+    t = t.replace("AFOTSI", "AFTOSI")
+    t = t.replace("AFOTSI DEL CAVO ORALE", "AFTOSI CAVO ORALE")
+    t = t.replace("ERIPISELA", "ERISIPELA")
+
+    t = t.replace("FARINGOTONSILLITI", "FARINGOTONSILLITE")
+    t = t.replace("CUTANEA IPERCROMICHE DIFFUSE", "MANIFESTAZIONI CUTANEA IPERCROMICHE DIFFUSE")
+
+    return t
+
+
+def map_mucocutaneous(raw: str | None) -> Mucocutaneous:
+    if raw is None:
+        return Mucocutaneous.NONE
+
+    s = raw.strip().upper()
+
+    if s in ("NO", "N", "", "NONE"):
+        return Mucocutaneous.NONE
+
+    parts = [normalize_mucocutaneous_token(p) for p in s.split(",") if p.strip()]
+    pset = set(parts)
+
+    if pset == {"AFTOSI ORALE"}:
+        return Mucocutaneous.ORAL_APHTHOUS
+
+    if pset == {"AFTOSI CAVO ORALE"}:
+        return Mucocutaneous.ORAL_APHTHOUS_CAVITY
+
+    if pset == {"FARINGOTONSILLITE ESSUDATIVA"}:
+        return Mucocutaneous.EXUDATIVE_PHARYNGOTONSILLITIS
+
+    if pset == {"FARINGOTONSILLITE ERITEMATOSA"}:
+        return Mucocutaneous.ERYTHEMATOUS_PHARYNGOTONSILLITIS
+
+    if pset == {"ERISIPELA"}:
+        return Mucocutaneous.ERYSIPELAS
+
+    if pset == {"IPEREMIA FARINGEA"}:
+        return Mucocutaneous.PHARYNGEAL_HYPEREMIA
+
+    if pset == {"IPERTROFIA TONSILLARE"}:
+        return Mucocutaneous.TONSILLAR_HYPERTROPHY
+
+    if pset == {"MANIFESTAZIONI CUTANEA IPERCROMICHE DIFFUSE"}:
+        return Mucocutaneous.HYPERPIGMENTED_CUTANEOUS_LESIONS
+
+    if pset == {"AFTOSI ORALE", "FARINGOTONSILLITE ESSUDATIVA"}:
+        return Mucocutaneous.APHTHOUS_AND_EXUDATIVE_PHARYNGOTONSILLITIS
+
+    if pset == {"AFTOSI ORALE", "ERISIPELA", "FARINGOTONSILLITE ESSUDATIVA"}:
+        return Mucocutaneous.APHTHOUS_ERYSIPELAS_AND_EXUDATIVE_PHARYNGOTONSILLITIS
+
+    if pset == {"MANIFESTAZIONI CUTANEA IPERCROMICHE DIFFUSE", "FARINGOTONSILLITE ESSUDATIVA"}:
+        return Mucocutaneous.HYPERPIGMENTED_AND_EXUDATIVE_PHARYNGOTONSILLITIS
+
+    return Mucocutaneous.UNKNOWN
+
+
+def map_therapy_response(raw: str | None) -> TherapyResponse:
+    """
+    Map a raw string to a TherapyResponse enum value.
+    """
+    if raw is None:
+        return TherapyResponse.UNKNOWN
+
+    normalized = raw.strip().upper()
+
+    if normalized in ("NO", "N", "NONE"):
+        return TherapyResponse.NO
+
+    if normalized in ("YES", "Y"):
+        return TherapyResponse.YES
+
+    if normalized in ("SUBOPTIMAL", "SUB-OPTIMAL", "SUBOPTIMAL RESPONSE", "SUB-OPTIMAL RESPONSE", "SUB"):
+        return TherapyResponse.SUBOPTIMAL
+
+    return TherapyResponse.UNKNOWN
+
+
+def map_collateral_effects(raw: str | None) -> CollateralEffects:
+    """
+    Map a raw string to a CollateralEffects enum value.
+    """
+    if raw is None:
+        return CollateralEffects.UNKNOWN
+
+    normalized = raw.strip().upper()
+
+    if normalized in ("NO", "N", "NONE"):
+        return CollateralEffects.NO
+
+    if normalized in ("YES", "Y"):
+        return CollateralEffects.YES
+
+    if normalized in ("SI; INTOLL E NON RESPONSIVA", "INTOLLERANT AND NOT RESPONSIVE", "INTOLLERANT & NOT RESPONSIVE", "INTOLLERANT"):
+        return CollateralEffects.INTOLLERANT_AND_NOT_RESPONSIVE
+
+    return CollateralEffects.UNKNOWN
+
+
+def map_amyloidosis(raw: str | None) -> Amyloidosis:
+    """
+    Map a raw string to an Amyloidosis enum value.
+    """
+    if raw is None:
+        return Amyloidosis.UNKNOWN
+
+    normalized = raw.strip().upper()
+
+    if normalized in ("NO", "N", "NONE"):
+        return Amyloidosis.NO
+
+    if normalized in ("YES", "Y"):
+        return Amyloidosis.YES
+
+    if normalized in ("DIARRHEA", "DIARREA"):
+        return Amyloidosis.DIARRHEA
+
+    if normalized in ("DIARREA,  PIROSI RETROST, CALO PONDERALE"):
+        return Amyloidosis.DIARRHEA_RETROSTERNAL_HEARTBURN_WEIGHT_LOSS
+
+    return Amyloidosis.UNKNOWN

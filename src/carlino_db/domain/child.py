@@ -1,10 +1,16 @@
 from .gender import Gender
 from .country import Country
 from dataclasses import dataclass
+from .episode_duration import EpisodeDuration
 from .temperature_category import TemperatureCategory
 from .mutation import Mutation
 from .optional_bool import OptionalBool
 from .fever_trigger import FeverTrigger
+from .abdominal_surgery import AbdominalSurgery
+from .mucocutaneous import Mucocutaneous
+from .therapy_response import TherapyResponse
+from .collateral_effects import CollateralEffects
+from .amyloidosis import Amyloidosis
 
 
 @dataclass
@@ -29,7 +35,7 @@ class Child:
 
     fever: OptionalBool       
     temperature_category: TemperatureCategory
-    episode_duration_days: int    
+    episode_duration: EpisodeDuration    
     episodes_per_year: int        
     fever_trigger: FeverTrigger          
 
@@ -37,7 +43,7 @@ class Child:
     diarrhea: bool    
     constipation: bool
     vomiting: bool    
-    abdominal_surgery: bool          
+    abdominal_surgery: AbdominalSurgery          
 
     chest_pain: bool  
     pericarditis: bool
@@ -49,14 +55,14 @@ class Child:
     bone_pain: bool   
 
     erysipelas_like: bool            
-    mucocutaneous: bool              
+    mucocutaneous: Mucocutaneous              
     other_manifestations: str 
 
-    therapy: bool     
+    therapy: OptionalBool     
     dosage_mg_day: float      
-    therapy_response: bool           
-    side_effects: bool
+    therapy_response: TherapyResponse           
+    side_effects: CollateralEffects
     biological_therapy: bool         
 
-    amyloidosis: bool 
+    amyloidosis: Amyloidosis 
     concomitant_diseases: str 

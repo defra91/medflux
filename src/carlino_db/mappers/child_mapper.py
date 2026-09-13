@@ -1,7 +1,6 @@
 from ..domain.child import Child
 from ..models.patient_record import PatientRecord
-from .base_mappers import map_gender, map_country, map_str, map_int, map_boolean, map_mutation, map_fever_trigger, map_float, map_optional_bool, map_temperature_category
-
+from .base_mappers import map_gender, map_country, map_str, map_int, map_boolean, map_mutation, map_fever_trigger, map_float, map_optional_bool, map_temperature_category, map_episode_duration, map_abdominal_surgery, map_mucocutaneous, map_therapy_response, map_collateral_effects, map_amyloidosis
 
 def map_child(patient_record: PatientRecord) -> Child:
     """
@@ -10,8 +9,8 @@ def map_child(patient_record: PatientRecord) -> Child:
 
     return Child(
         # Identifiers
-        centre_id=patient_record.centre_id,
-        family_id=patient_record.family_id,
+        centre_id=map_str(patient_record.centre_id),
+        family_id=map_str(patient_record.family_id),
         eurofever_id=map_str(patient_record.id_eurofever),
 
         # Demographics
@@ -32,7 +31,7 @@ def map_child(patient_record: PatientRecord) -> Child:
         # Fever & episodes
         fever=map_optional_bool(patient_record.febbre),
         temperature_category=map_temperature_category(patient_record.tc_max),
-        episode_duration_days=map_int(patient_record.durata_episodi),
+        episode_duration=map_episode_duration(patient_record.durata_episodi),
         episodes_per_year=map_int(patient_record.episodi_anno),
         fever_trigger=map_fever_trigger(patient_record.trigger_febbre),
 
@@ -41,7 +40,7 @@ def map_child(patient_record: PatientRecord) -> Child:
         diarrhea=map_boolean(patient_record.dia),
         constipation=map_boolean(patient_record.stip),
         vomiting=map_boolean(patient_record.vom),
-        abdominal_surgery=map_boolean(patient_record.chir_add),
+        abdominal_surgery=map_abdominal_surgery(patient_record.chir_add),
 
         # Chest
         chest_pain=map_boolean(patient_record.dol_toracico),
@@ -56,17 +55,17 @@ def map_child(patient_record: PatientRecord) -> Child:
 
         # Skin / mucosa
         erysipelas_like=map_boolean(patient_record.erisipela_like),
-        mucocutaneous=map_boolean(patient_record.mucocutanee),
+        mucocutaneous=map_mucocutaneous(patient_record.mucocutanee),
         other_manifestations=map_str(patient_record.altro),
 
         # Therapy
-        therapy=map_boolean(patient_record.terapia),
+        therapy=map_optional_bool(patient_record.terapia),
         dosage_mg_day=map_float(patient_record.dosaggio_mg_die),
-        therapy_response=map_boolean(patient_record.risp_alla_tx),
-        side_effects=map_boolean(patient_record.eff_collaterali),
+        therapy_response=map_therapy_response(patient_record.risp_alla_tx),
+        side_effects=map_collateral_effects(patient_record.eff_collaterali),
         biological_therapy=map_boolean(patient_record.terapia_biologica),
 
         # Complications / comorbidities
-        amyloidosis=map_boolean(patient_record.amiloidosi),
+        amyloidosis=map_amyloidosis(patient_record.amiloidosi),
         concomitant_diseases=map_str(patient_record.malattie_concomitanti),
     )

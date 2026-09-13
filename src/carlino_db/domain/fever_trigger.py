@@ -2,9 +2,7 @@ from enum import Enum
 
 
 class FeverTrigger(Enum):
-    NONE = "NONE"
-    STRESS = "STRESS"
-    INFECTION = "INFECTION"
-    COLD = "COLD"
-    EXERCISE = "EXERCISE"
+    NC = "NC"
+    NO = "NO"
+    MENSTRUATION = "Menstruation"
     UNKNOWN = "UNK"
