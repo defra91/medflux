@@ -19,7 +19,11 @@ class ReportViewModel:
     title: str
     subtitle: str | None = None
 
+    style_links: list[str] = field(default_factory=list)
+
     families: list[Family] = field(default_factory=list)
     statistics: Statistics | None = None
 
+    version: str | None = None
+    author: str | None = None
     created_at: datetime = field(default_factory=datetime.now)

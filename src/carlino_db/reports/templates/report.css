@@ -1,6 +1,7 @@
 @page {
-    size: A3;
-    margin: 10mm 12mm 14mm 12mm; /* top right bottom left */
+    size: AA;
+    orientation: portrait;
+    margin: 1.5cm;
 }
 
 body {

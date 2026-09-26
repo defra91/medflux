@@ -1,5 +1,4 @@
 import logging
-from datetime import datetime
 from pathlib import Path
 
 from .db import load_family_records, load_patient_records
@@ -9,7 +8,23 @@ from .reports.pdf import html_to_pdf
 from .reports.renderer import render_family_report
 from .services.family_builder import build_families
 from .statistics.statistics_calculation import calculate_statistics
-from .view_models.report_viewmodel import ReportViewModel
+from .view_models.report_viewmodel_builder import build_report_viewmodel
+
+
+def _build_report_viewmodel(families, statistics, target: str):
+    title = "Familial Genetic Assessment Report"
+    subtitle = "Analysis of Mutations, Phenotypes, and Familial Relationships"
+    version = "1.0"
+    author = "Mariagrazia Carlino"
+
+    return build_report_viewmodel(
+        title=title,
+        subtitle=subtitle,
+        version=version,
+        author=author,
+        families=families,
+        statistics=statistics,
+        target=target)
 
 
 def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = False):
@@ -54,17 +69,18 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
     logging.info("Statistics computed successfully.")
 
     # Build view model
-    vm = ReportViewModel(
-        title="Children Report",
-        subtitle=None,
-        families=families,
-        statistics=statistics,
-        created_at=datetime.now(),
-    )
+    vm = _build_report_viewmodel(families=families, statistics=statistics, target="pdf")
 
     # Render HTML and convert to PDF
     logging.info("Rendering HTML report...")
     html = render_family_report(vm)
+
+    if debug:
+        vm_debug = _build_report_viewmodel(families=families, statistics=statistics, target="html")
+        html_debug = render_family_report(vm_debug)
+        logging.debug("Exporting rendered HTML for debugging purposes.")
+        with open("report.html", "w") as f:
+            f.write(html_debug)
 
     logging.info("Generating PDF...")
     html_to_pdf(html, output_path)

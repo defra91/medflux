@@ -1,13 +1,13 @@
 import json
 from collections.abc import Iterable
 from enum import Enum
+from pathlib import Path
 from typing import Any
 
-from .config import OUTPUT_DIR
-
+DEBUG_DIR = Path.cwd() / "debug"
 
 def write_json(objects: Iterable[Any], filename: str) -> None:
-    OUTPUT_DIR.mkdir(exist_ok=True)
+    DEBUG_DIR.mkdir(exist_ok=True)
 
     serializable = []
 
@@ -30,5 +30,5 @@ def write_json(objects: Iterable[Any], filename: str) -> None:
 
         serializable.append(data)
 
-    with open(OUTPUT_DIR / filename, "w", encoding="utf-8") as f:
+    with open(DEBUG_DIR / filename, "w", encoding="utf-8") as f:
         json.dump(serializable, f, indent=2, ensure_ascii=False)

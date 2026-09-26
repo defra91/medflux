@@ -7,7 +7,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
+        {% for style in vm.style_links %}
+            <link rel="stylesheet" href="{{ style }}">
+        {% endfor %}
+
         <link rel="stylesheet" href="bootstrap.min.css">
         <link rel="stylesheet" href="report.css">
 
@@ -18,72 +22,73 @@
 
     <body>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-6">
-                    <h1>{{ vm.title }}</h1>
+        <div class="report-header mb-4">
+            <div class="row align-items-center">
+
+                <!-- Left side: Title -->
+                <div class="col-8">
+                    <h1 class="report-title">{{ vm.title }}</h1>
+
                     {% if vm.subtitle %}
-                        <div class="subtitle">{{ vm.subtitle }}</div>
+                        <div class="report-subtitle">{{ vm.subtitle }}</div>
                     {% endif %}
                 </div>
-                <div class="col-6 text-end">
+
+                <!-- Right side: Metadata -->
+                <div class="col-4 text-end report-meta">
+
                     {% if vm.created_at %}
-                        <div class="created-at">Generated on: {{ vm.created_at.strftime("%Y-%m-%d %H:%M") }}</div>
+                        <div class="meta-item">
+                            <strong>Date:</strong>
+                            {{ vm.created_at.strftime("%Y-%m-%d %H:%M") }}
+                        </div>
                     {% endif %}
+
+                    <div class="meta-item">
+                        <strong>Families:</strong>
+                        {{ vm.families|length }}
+                    </div>
+
+                    <div class="meta-item">
+                        <strong>Version:</strong>
+                        {{ vm.version }}
+                    </div>
+
+                    <div class="meta-item">
+                        <strong>Author:</strong>
+                        {{ vm.author }}
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         {% if vm.statistics %}
-            <div class="container-fluid">
-                <h2>Statistics</h2>
-                {{ statistics_template.render_statistics(vm.statistics) }}
-            </div>
+            <h2>Statistics</h2>
+            {{ statistics_template.render_statistics(vm.statistics) }}
         {% endif %}
 
-        <div class="container-fluid">
-            <h2>Families Catalog</h2>
-        </div>
-
-        {% for family in vm.families %}
-        <div class="family-block container-fluid">
-
-            <h2>Family {{ family.id }}</h2>
-
-            <div class="section row">
-                <div class="col-6">
-                    <h3>Mother</h3>
-                    {% if family.mother %}
-                        {{ parent_template.render_parent(family.mother) }}
-                    {% else %}
-                        <div class="empty">Mother not available</div>
-                    {% endif %}
-                </div>
-
-                <div class="col-6">
-                    <h3>Father</h3>
-                    {% if family.father %}
-                        {{ parent_template.render_parent(family.father) }}
-                    {% else %}
-                        <div class="empty">Father not available</div>
-                    {% endif %}
-                </div>
-            </div>
-
-            {% if family.children %}
-                <div class="section">
-                    <h3>Children</h3>
-
-                    {% for child in family.children %}
-                        {{ child_template.render_child(child) }}
+        <h2>Families Catalog</h2>
+        <div class="table-container">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>Family ID</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for family in vm.families %}
+                        {% for component in family.components %}
+                            <tr>
+                                <td>{{ family.id }}</td>
+                                <td>{{ component.role }}</td>
+                            </tr>
+                        {% endfor %}
                     {% endfor %}
-                </div>
-            {% else %}
-                <div class="empty">No children recorded</div>
-            {% endif %}
-
+                </tbody>
+            </table>
         </div>
-        {% endfor %}
+
 
     </body>
 </html>
