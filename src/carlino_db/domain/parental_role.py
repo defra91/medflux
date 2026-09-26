@@ -2,10 +2,12 @@
 
 from enum import Enum
 
-class ParentalRole(str, Enum):
+
+class ParentalRole(Enum):
     """
     Enum representing the parental role of a parent.
     """
+
     MOTHER = "mother"
     FATHER = "father"
     UNKNOWN = "unknown"

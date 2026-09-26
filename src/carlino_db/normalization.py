@@ -1,7 +1,8 @@
 # src/carlino_db/normalization.py
 
-from typing import Any
 import math
+from typing import Any
+
 
 def normalize_cell_value(v: Any) -> str | None:
     """

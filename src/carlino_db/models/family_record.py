@@ -1,42 +1,43 @@
 # src/carlino_db/models/family_record.py
 
+
 from pydantic import BaseModel
-from typing import Optional
+
 
 class FamilyRecord(BaseModel):
     family_id: str
-    padre_madre: Optional[str]
-    mutazione: Optional[str]
+    padre_madre: str | None
+    mutazione: str | None
 
-    febbre_ricorrente: Optional[str]
-    t_max: Optional[str]
-    durata: Optional[str]
+    febbre_ricorrente: str | None
+    t_max: str | None
+    durata: str | None
 
-    dol_addominale: Optional[str]
-    dol_toracico: Optional[str]
-    cefalea: Optional[str]
-    dol_osteoarticolari: Optional[str]
+    dol_addominale: str | None
+    dol_toracico: str | None
+    cefalea: str | None
+    dol_osteoarticolari: str | None
 
-    aftosi_con_febbre: Optional[str]
-    aftosi_senza_febbre: Optional[str]
+    aftosi_con_febbre: str | None
+    aftosi_senza_febbre: str | None
 
-    tonsillite_eritematosa: Optional[str]
-    tonsillite_essudativa: Optional[str]
+    tonsillite_eritematosa: str | None
+    tonsillite_essudativa: str | None
 
-    man_cutanee: Optional[str]
-    astenia: Optional[str]
-    irc: Optional[str]
+    man_cutanee: str | None
+    astenia: str | None
+    irc: str | None
 
-    febbre_eta_adulta: Optional[str]
-    amiloidosi_famiglia: Optional[str]
+    febbre_eta_adulta: str | None
+    amiloidosi_famiglia: str | None
 
-    esordio_lt_18: Optional[str]
-    esordio_gt_18: Optional[str]
+    esordio_lt_18: str | None
+    esordio_gt_18: str | None
 
-    episodi_anno: Optional[str]
-    tonsillectomia: Optional[str]
-    appendicectomia: Optional[str]
+    episodi_anno: str | None
+    tonsillectomia: str | None
+    appendicectomia: str | None
 
-    miglioramento_eta_adulta: Optional[str]
-    fam_irc: Optional[str]
-    consanguineita: Optional[str]
+    miglioramento_eta_adulta: str | None
+    fam_irc: str | None
+    consanguineita: str | None

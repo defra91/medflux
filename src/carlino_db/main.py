@@ -1,17 +1,15 @@
-﻿import logging
+import logging
 from datetime import datetime
 from pathlib import Path
 
 from .db import load_family_records, load_patient_records
-from .view_models.report_viewmodel import ReportViewModel
-from .mappers.parent_mapper import map_parent
 from .mappers.child_mapper import map_child
-
-from .reports.renderer import render_family_report
+from .mappers.parent_mapper import map_parent
 from .reports.pdf import html_to_pdf
-
+from .reports.renderer import render_family_report
 from .services.family_builder import build_families
 from .statistics.statistics_calculation import calculate_statistics
+from .view_models.report_viewmodel import ReportViewModel
 
 
 def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = False):
@@ -21,8 +19,7 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
 
     # Configure logging
     logging.basicConfig(
-        level=logging.DEBUG if verbose else logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(message)s"
+        level=logging.DEBUG if verbose else logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
     )
 
     logging.info("Starting Carlino DB processing pipeline...")
@@ -44,6 +41,7 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
     if debug:
         logging.debug("Debug mode enabled: exporting raw mapped JSON files.")
         from .writer import write_json
+
         write_json(parents, "parents.json")
         write_json(children, "children.json")
 

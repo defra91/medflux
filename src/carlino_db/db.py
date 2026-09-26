@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import pandas as pd
+
 from .models.family_record import FamilyRecord
 from .models.patient_record import PatientRecord
 from .normalization import normalize_cell_value
@@ -12,7 +13,7 @@ def load_family_records(db_path: Path) -> list[FamilyRecord]:
     """
     Load the first sheet of the Excel file and return a list of FamilyRecord instances.
     """
-    
+
     df = pd.read_excel(db_path, sheet_name=0)
 
     df.columns = [
@@ -92,7 +93,7 @@ def load_patient_records(db_path: Path) -> list[PatientRecord]:
         "erisipela_like",
         "mucocutanee",
         "altro",
-        "altro_2",              # <--- la colonna vuota!
+        "altro_2",  # <--- la colonna vuota!
         "terapia",
         "dosaggio_mg_die",
         "risp_alla_tx",

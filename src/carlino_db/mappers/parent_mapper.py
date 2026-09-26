@@ -1,7 +1,14 @@
 from ..domain.parent import Parent
 from ..models.family_record import FamilyRecord
-from ..domain.parental_role import ParentalRole
-from .base_mappers import map_str, map_boolean, map_temperature_category, map_episode_duration, map_int, map_parental_role, map_family_id
+from .base_mappers import (
+    map_boolean,
+    map_episode_duration,
+    map_family_id,
+    map_int,
+    map_parental_role,
+    map_str,
+    map_temperature_category,
+)
 
 
 def map_parent(family_record: FamilyRecord) -> Parent:
@@ -30,7 +37,7 @@ def map_parent(family_record: FamilyRecord) -> Parent:
     family_amyloidosis = map_boolean(family_record.amiloidosi_famiglia)
     onset_before_18 = map_boolean(family_record.esordio_lt_18)
     onset_after_18 = map_boolean(family_record.esordio_gt_18)
-    episodes_per_year = map_int(family_record.episodi_anno) 
+    episodes_per_year = map_int(family_record.episodi_anno)
     tonsillectomy = map_boolean(family_record.tonsillectomia)
     appendicectomy = map_boolean(family_record.appendicectomia)
     improvement_in_adulthood = map_boolean(family_record.miglioramento_eta_adulta)
@@ -64,5 +71,5 @@ def map_parent(family_record: FamilyRecord) -> Parent:
         appendicectomy=appendicectomy,
         improvement_in_adulthood=improvement_in_adulthood,
         family_respiratory_infections_chronic=family_respiratory_infections_chronic,
-        consanguinity=consanguinity
+        consanguinity=consanguinity,
     )

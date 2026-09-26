@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, List
 
-from ..statistics.models.statistics import Statistics
 from ..domain.family import Family
+from ..statistics.models.statistics import Statistics
 
 
 @dataclass
@@ -16,10 +15,11 @@ class ReportViewModel:
     - statistiche calcolate (opzionali)
     - timestamp di creazione
     """
-    title: str
-    subtitle: Optional[str] = None
 
-    families: List[Family] = field(default_factory=list)
-    statistics: Optional[Statistics] = None
+    title: str
+    subtitle: str | None = None
+
+    families: list[Family] = field(default_factory=list)
+    statistics: Statistics | None = None
 
     created_at: datetime = field(default_factory=datetime.now)

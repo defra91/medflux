@@ -1,16 +1,17 @@
-from ..domain.temperature_category import TemperatureCategory
-from ..domain.episode_duration import EpisodeDuration
-from ..domain.parental_role import ParentalRole
-from ..domain.gender import Gender
-from ..domain.country import Country
-from ..domain.mutation import Mutation
-from ..domain.fever_trigger import FeverTrigger
-from ..domain.optional_bool import OptionalBool
 from ..domain.abdominal_surgery import AbdominalSurgery
-from ..domain.mucocutaneous import Mucocutaneous
-from ..domain.therapy_response import TherapyResponse
-from ..domain.collateral_effects import CollateralEffects
 from ..domain.amyloidosis import Amyloidosis
+from ..domain.collateral_effects import CollateralEffects
+from ..domain.country import Country
+from ..domain.episode_duration import EpisodeDuration
+from ..domain.fever_trigger import FeverTrigger
+from ..domain.gender import Gender
+from ..domain.mucocutaneous import Mucocutaneous
+from ..domain.mutation import Mutation
+from ..domain.optional_bool import OptionalBool
+from ..domain.parental_role import ParentalRole
+from ..domain.temperature_category import TemperatureCategory
+from ..domain.therapy_response import TherapyResponse
+
 
 def map_str(raw: str | None) -> str | None:
     if raw is None:
@@ -27,7 +28,6 @@ def map_float(raw: str | None) -> float | None:
         return float(s)
     except ValueError:
         return None
-
 
 
 def map_boolean(value: str | None) -> bool | None:
@@ -61,7 +61,7 @@ def map_optional_bool(value: str | None) -> OptionalBool | None:
 
     if s in ("1", "1.0", "YES", "Y", "TRUE", "T", "SI", "S", "SÌ"):
         return OptionalBool.TRUE
-    
+
     if s in ("0", "0.0", "NO", "N", "FALSE", "F"):
         return OptionalBool.FALSE
 
@@ -323,7 +323,12 @@ def map_collateral_effects(raw: str | None) -> CollateralEffects:
     if normalized in ("YES", "Y"):
         return CollateralEffects.YES
 
-    if normalized in ("SI; INTOLL E NON RESPONSIVA", "INTOLLERANT AND NOT RESPONSIVE", "INTOLLERANT & NOT RESPONSIVE", "INTOLLERANT"):
+    if normalized in (
+        "SI; INTOLL E NON RESPONSIVA",
+        "INTOLLERANT AND NOT RESPONSIVE",
+        "INTOLLERANT & NOT RESPONSIVE",
+        "INTOLLERANT",
+    ):
         return CollateralEffects.INTOLLERANT_AND_NOT_RESPONSIVE
 
     return CollateralEffects.UNKNOWN

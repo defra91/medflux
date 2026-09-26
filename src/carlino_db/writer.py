@@ -1,8 +1,9 @@
-from pathlib import Path
 import json
-from typing import Any, Iterable
-from .config import OUTPUT_DIR
+from collections.abc import Iterable
 from enum import Enum
+from typing import Any
+
+from .config import OUTPUT_DIR
 
 
 def write_json(objects: Iterable[Any], filename: str) -> None:
@@ -20,10 +21,7 @@ def write_json(objects: Iterable[Any], filename: str) -> None:
             data = obj.__dict__
 
         else:
-            raise TypeError(
-                f"Impossibile serializzare oggetto di tipo {type(obj)}: "
-                "manca model_dump() o __dict__"
-            )
+            raise TypeError(f"Impossibile serializzare oggetto di tipo {type(obj)}: manca model_dump() o __dict__")
 
         # Convert enum to their values for JSON serialization
         for key, value in data.items():

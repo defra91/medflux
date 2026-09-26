@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Mucocutaneous(Enum):
     NONE = "None"
 

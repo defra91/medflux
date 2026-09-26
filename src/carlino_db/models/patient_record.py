@@ -1,52 +1,52 @@
 from pydantic import BaseModel
-from typing import Optional
+
 
 class PatientRecord(BaseModel):
     centre_id: str
     family_id: str
-    id_eurofever: Optional[str]
-    sesso: Optional[str]
-    country: Optional[str]
+    id_eurofever: str | None
+    sesso: str | None
+    country: str | None
 
-    eta_esordio: Optional[str]
-    eta_diagnosi: Optional[str]
+    eta_esordio: str | None
+    eta_diagnosi: str | None
 
-    genitori_consanguinei: Optional[str]
-    familiarita: Optional[str]
+    genitori_consanguinei: str | None
+    familiarita: str | None
 
-    genetica: Optional[str]
+    genetica: str | None
 
-    febbre: Optional[str]
-    tc_max: Optional[str]
-    durata_episodi: Optional[str]
-    episodi_anno: Optional[str]
+    febbre: str | None
+    tc_max: str | None
+    durata_episodi: str | None
+    episodi_anno: str | None
 
-    trigger_febbre: Optional[str]
+    trigger_febbre: str | None
 
-    dol_add: Optional[str]
-    dia: Optional[str]
-    stip: Optional[str]
-    vom: Optional[str]
-    chir_add: Optional[str]
+    dol_add: str | None
+    dia: str | None
+    stip: str | None
+    vom: str | None
+    chir_add: str | None
 
-    dol_toracico: Optional[str]
-    pericardite: Optional[str]
-    pleurite: Optional[str]
+    dol_toracico: str | None
+    pericardite: str | None
+    pleurite: str | None
 
-    artralgia: Optional[str]
-    artrite: Optional[str]
-    mialgia: Optional[str]
-    dolore_osseo: Optional[str]
+    artralgia: str | None
+    artrite: str | None
+    mialgia: str | None
+    dolore_osseo: str | None
 
-    erisipela_like: Optional[str]
-    mucocutanee: Optional[str]
-    altro: Optional[str]
+    erisipela_like: str | None
+    mucocutanee: str | None
+    altro: str | None
 
-    terapia: Optional[str]
-    dosaggio_mg_die: Optional[str]
-    risp_alla_tx: Optional[str]
-    eff_collaterali: Optional[str]
+    terapia: str | None
+    dosaggio_mg_die: str | None
+    risp_alla_tx: str | None
+    eff_collaterali: str | None
 
-    terapia_biologica: Optional[str]
-    amiloidosi: Optional[str]
-    malattie_concomitanti: Optional[str]
+    terapia_biologica: str | None
+    amiloidosi: str | None
+    malattie_concomitanti: str | None

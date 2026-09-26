@@ -1,12 +1,11 @@
-from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
+
+from jinja2 import Environment, FileSystemLoader
 
 TEMPLATE_DIR = Path(__file__).parent / "templates"
 
-env = Environment(
-    loader=FileSystemLoader(str(TEMPLATE_DIR)),
-    autoescape=True
-)
+env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=True)
+
 
 def render_family_report(vm) -> str:
     template = env.get_template("family_report.html")
@@ -18,7 +17,11 @@ def yes_no(value):
 
 
 def yes_no_check(value):
-    return "<i class='fa fa-check-square-o' aria-hidden='true'></i>" if value else "<i class='fa fa-square-o' aria-hidden='true'></i>"
+    return (
+        "<i class='fa fa-check-square-o' aria-hidden='true'></i>"
+        if value
+        else "<i class='fa fa-square-o' aria-hidden='true'></i>"
+    )
 
 
 def days(value):
@@ -33,6 +36,7 @@ def format_float(value):
         return f"{value:,.2f}"
     except Exception:
         return str(value)
+
 
 env.filters["yes_no"] = yes_no
 env.filters["days"] = days

@@ -1,10 +1,8 @@
-from typing import List
-
-from .models.statistics import Statistics, FamilyStats, ProbandStats, ParentStats, ConcordanceStats, MutationGroupStats
 from ..domain.family import Family
+from .models.statistics import ConcordanceStats, FamilyStats, MutationGroupStats, ParentStats, ProbandStats, Statistics
 
 
-def calculate_statistics(families: List[Family]) -> Statistics:
+def calculate_statistics(families: list[Family]) -> Statistics:
     """
     Calcola tutte le statistiche del progetto a partire dalla lista di famiglie.
     Restituisce un oggetto Statistics completamente popolato.
@@ -24,7 +22,7 @@ def calculate_statistics(families: List[Family]) -> Statistics:
     )
 
 
-def calculate_family_stats(families: List[Family]) -> FamilyStats:
+def calculate_family_stats(families: list[Family]) -> FamilyStats:
     """
     Calcola:
     - numero famiglie
@@ -39,7 +37,7 @@ def calculate_family_stats(families: List[Family]) -> FamilyStats:
     )
 
 
-def calculate_proband_stats(families: List[Family]) -> ProbandStats:
+def calculate_proband_stats(families: list[Family]) -> ProbandStats:
     """
     Calcola statistiche sui probandi:
     - frequenza sintomi
@@ -58,7 +56,7 @@ def calculate_proband_stats(families: List[Family]) -> ProbandStats:
     )
 
 
-def calculate_parent_stats(families: List[Family]) -> ParentStats:
+def calculate_parent_stats(families: list[Family]) -> ParentStats:
     """
     Calcola statistiche sui genitori:
     - consanguineità
@@ -83,7 +81,7 @@ def calculate_parent_stats(families: List[Family]) -> ParentStats:
     )
 
 
-def calculate_concordance_stats(families: List[Family]) -> ConcordanceStats:
+def calculate_concordance_stats(families: list[Family]) -> ConcordanceStats:
     """
     Calcola la concordanza genitore–figlio:
     - sintomi condivisi
@@ -100,7 +98,7 @@ def calculate_concordance_stats(families: List[Family]) -> ConcordanceStats:
     )
 
 
-def calculate_mutation_group_stats(families: List[Family]) -> dict[str, MutationGroupStats]:
+def calculate_mutation_group_stats(families: list[Family]) -> dict[str, MutationGroupStats]:
     """
     Calcola statistiche per gruppi di genitori portatori della stessa mutazione:
     - numero soggetti

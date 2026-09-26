@@ -1,13 +1,14 @@
 # src/carlino_db/domain/parent.py
 
 from dataclasses import dataclass
+
+from .episode_duration import EpisodeDuration
 from .parental_role import ParentalRole
 from .temperature_category import TemperatureCategory
-from .episode_duration import EpisodeDuration
+
 
 @dataclass
 class Parent:
-
     family_id: str
     parental_role: ParentalRole
     mutation: str
@@ -15,7 +16,7 @@ class Parent:
     temperature_category: TemperatureCategory
     episode_duration: EpisodeDuration
     abdominal_pain: bool
-    chest_pain: bool 
+    chest_pain: bool
     headache: bool
     osteoarticular_pain: bool
     aphthosis_with_fever: bool

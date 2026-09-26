@@ -1,16 +1,15 @@
 # src/carlino_db/domain/family.py
 
 from dataclasses import dataclass
-from typing import Optional, List
 
-from .parent import Parent
 from .child import Child
+from .parent import Parent
 
 
 @dataclass
 class Family:
     id: str
-    mother: Optional[Parent]
-    father: Optional[Parent]
+    mother: Parent | None
+    father: Parent | None
 
     children: list[Child]
