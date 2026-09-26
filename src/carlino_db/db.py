@@ -1,19 +1,19 @@
 # src/db.py
 
+from pathlib import Path
+
 import pandas as pd
-from .config import ORIGINAL_DB_PATH, DESTINATION_DB_PATH
 from .models.family_record import FamilyRecord
 from .models.patient_record import PatientRecord
 from .normalization import normalize_cell_value
-import math
 
 
-def load_family_records() -> list[FamilyRecord]:
+def load_family_records(db_path: Path) -> list[FamilyRecord]:
     """
     Load the first sheet of the Excel file and return a list of FamilyRecord instances.
     """
     
-    df = pd.read_excel(ORIGINAL_DB_PATH, sheet_name=0)
+    df = pd.read_excel(db_path, sheet_name=0)
 
     df.columns = [
         "family_id",
@@ -54,12 +54,12 @@ def load_family_records() -> list[FamilyRecord]:
     return records
 
 
-def load_patient_records() -> list[PatientRecord]:
+def load_patient_records(db_path: Path) -> list[PatientRecord]:
     """
     Load the second sheet of the Excel file and return a list of PatientRecord instances.
     """
 
-    df = pd.read_excel(ORIGINAL_DB_PATH, sheet_name=1)
+    df = pd.read_excel(db_path, sheet_name=1)
 
     df.columns = [
         "centre_id",
