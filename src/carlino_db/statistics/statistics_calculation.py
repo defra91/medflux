@@ -1,5 +1,13 @@
 from ..domain.family import Family
-from .models.statistics import ConcordanceStats, FamilyStats, MutationGroupStats, ParentStats, ProbandStats, Statistics
+from .concordance_calculations import compute_concordance_by_mutation
+from .family_calculations import compute_frequency_distribution, extract_mutations
+from .models.concordance_stats import ConcordanceStats
+from .models.family_stats import FamilyStats
+from .models.mutation_group_stats import MutationGroupStats
+from .models.parent_stats import ParentStats
+from .models.proband_stats import ProbandStats
+from .models.statistics import Statistics
+from .parent_calculations import compute_phenotype_distribution_by_mutation
 
 
 def calculate_statistics(families: list[Family]) -> Statistics:
@@ -13,12 +21,26 @@ def calculate_statistics(families: list[Family]) -> Statistics:
     concordance_stats = calculate_concordance_stats(families)
     mutation_groups = calculate_mutation_group_stats(families)
 
+    proband_mut, parent_mut = extract_mutations(families)
+    proband_distribution = compute_frequency_distribution(proband_mut)
+    parent_distribution = compute_frequency_distribution(parent_mut)
+
+    phenotype_distribution_by_mutation = compute_phenotype_distribution_by_mutation(
+        [parent for family in families for parent in family.parents()])
+
+    concordance_by_mutation = compute_concordance_by_mutation(families)
+
     return Statistics(
         families=family_stats,
         probands=proband_stats,
         parents=parent_stats,
         concordance=concordance_stats,
         mutation_groups=mutation_groups,
+
+        proband_distribution=proband_distribution,
+        parent_distribution=parent_distribution,
+        phenotype_distribution_by_mutation=phenotype_distribution_by_mutation,
+        concordance_by_mutation=concordance_by_mutation,
     )
 
 

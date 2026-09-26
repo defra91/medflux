@@ -13,3 +13,11 @@ class Family:
     father: Parent | None
 
     children: list[Child]
+
+    def parents(self) -> list[Parent]:
+        result = []
+        if self.mother is not None:
+            result.append(self.mother)
+        if self.father is not None:
+            result.append(self.father)
+        return result

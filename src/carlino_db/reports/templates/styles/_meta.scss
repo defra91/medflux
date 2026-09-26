@@ -1,16 +1,16 @@
 .report-meta {
-    .meta-item {
-        label {
-            width: 100px;
-            display: inline-block;
-            font-weight: 600;
-            padding-right: 16px;
-        }
-
-        .meta-value {
-            display: inline-block;
-            text-align: left;
-            width: 100px;
-        }
+  .meta-item {
+    label {
+      width: 90px;
+      display: inline-block;
+      font-weight: 600;
+      padding-right: 16px;
     }
+
+    .meta-value {
+      display: inline-block;
+      text-align: left;
+      width: 90px;
+    }
+  }
 }

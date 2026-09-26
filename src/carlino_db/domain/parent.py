@@ -12,6 +12,9 @@ class Parent:
     family_id: str
     parental_role: ParentalRole
     mutation: str
+
+    consanguinity: bool
+
     recurrent_fever: bool
     temperature_category: TemperatureCategory
     episode_duration: EpisodeDuration
@@ -35,4 +38,3 @@ class Parent:
     appendicectomy: bool
     improvement_in_adulthood: bool
     family_respiratory_infections_chronic: bool
-    consanguinity: bool

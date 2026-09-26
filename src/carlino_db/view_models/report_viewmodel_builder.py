@@ -1,48 +1,10 @@
 from datetime import datetime
-from pathlib import Path
 
 from ..domain.family import Family
 from ..statistics.models.statistics import Statistics
+from ..utilities.path_utilities import resolve_style_link, wsl_to_windows_unc
 from .family_viewmodel_builder import build_family_viewmodel
 from .report_viewmodel import ReportViewModel
-
-
-def wsl_to_windows_unc(path: str, distro: str = "Ubuntu") -> str:
-    """
-    Converte un path WSL in un path UNC Windows accessibile via \\wsl$.
-    Esempio:
-        /home/lucad/file.txt
-    diventa:
-        \\wsl$\\Ubuntu\\home\\lucad\\file.txt
-    """
-    p = Path(path)
-
-    # Normalizza il path in stringa
-    s = str(p)
-
-    # Rimuove eventuali prefissi strani (./, ../)
-    s = s.replace("\\", "/")
-
-    # Assicura che sia un path assoluto WSL
-    if not s.startswith("/"):
-        raise ValueError(f"Il path non è un path WSL assoluto: {s}")
-
-    # Costruzione UNC
-    unc = f"\\\\wsl$\\{distro}" + s.replace("/", "\\")
-    return unc
-
-
-
-def resolve_style_link(style: str) -> Path:
-    # Implement the logic to resolve the full path or URL for the given style
-
-    templates_dir = Path.cwd() / "src" / "carlino_db" / "reports" / "templates"
-    style_path = templates_dir / style
-
-    if style_path.exists():
-        return style_path
-    else:
-        return Path(style)
 
 
 def build_report_viewmodel(
@@ -72,6 +34,10 @@ def build_report_viewmodel(
     if target == "html":
         resolved_style_links = [wsl_to_windows_unc(style) for style in resolved_style_links]
 
+    total_families = len(family_vms)
+    total_children = sum(len(f.components) for f in family_vms)
+
+
     return ReportViewModel(
         title=title,
         subtitle=subtitle,
@@ -81,4 +47,6 @@ def build_report_viewmodel(
         statistics=statistics,
         author=author,
         created_at=datetime.now(),
+        total_families=total_families,
+        total_children=total_children,
     )

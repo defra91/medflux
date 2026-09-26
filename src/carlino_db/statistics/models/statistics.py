@@ -16,3 +16,10 @@ class Statistics:
     parents: ParentStats
     concordance: ConcordanceStats
     mutation_groups: dict[str, MutationGroupStats]
+
+    proband_distribution: list[dict]
+    parent_distribution: list[dict]
+
+    phenotype_distribution_by_mutation: dict[str, dict]
+
+    concordance_by_mutation: list[dict]

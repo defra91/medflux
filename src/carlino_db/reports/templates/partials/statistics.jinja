@@ -1,22 +1,30 @@
+{% import 'partials/statistics_genetic_variant_distribution.jinja' as stats_genetic_variant_distribution %}
 {% macro render_statistics(s) %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Total Families</th>
-                <td class="text-end">{{ s.total_families }}</td>
-            </tr>
-            <tr>
-                <th>Total Children</th>
-                <td class="text-end">{{ s.total_children }}</td>
-            </tr>
-            <tr>
-                <th>Average Children per Family</th>
-                <td class="text-end">{{ s.avg_children_per_family | format_float }}</td>
-            </tr>
-        </tbody>
-    </table>
+{{ stats_genetic_variant_distribution.render_statistics_genetic_variant_distribution(s) }}
 
-    <div class="container-fluid">
+<h3>2. Phenotype Frequency and Distribution</h3>
+
+TODO
+
+<h3>3. Proband Characteristics Summary</h3>
+
+TODO
+
+<h3>4. Family Composition Metrics</h3>
+
+TODO
+
+<h3>5. Clinical Indicators Overview</h3>
+
+TODO
+
+<h3>6. Episode Characteristics Summary</h3>
+
+TODO
+
+<h3>7. Treatment and Response Metrics</h3>
+
+TODO
 
 {% endmacro %}

@@ -1,0 +1,164 @@
+{% macro render_statistics_genetic_variant_distribution(s) %}
+
+<h3>1. Genetic Variant Distribution</h3>
+
+<div class="row">
+  <div class="col-6">
+    <h4>Proband Mutations</h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Mutation</th>
+            <th class="text-end">Count</th>
+            <th class="text-end">Frequency</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in s.proband_distribution %}
+          <tr>
+            <td>{{ item.mutation }}</td>
+            <td class="text-end">{{ item.count }}</td>
+            <td class="text-end">{{ item.percentage | format_float }} %</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-6">
+    <h4>Parent Mutations</h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Mutation</th>
+            <th class="text-end">Count</th>
+            <th class="text-end">Frequency</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in s.parent_distribution %}
+          <tr>
+            <td>{{ item.mutation }}</td>
+            <td class="text-end">{{ item.count }}</td>
+            <td class="text-end">{{ item.percentage | format_float }} %</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <h4>Phenotype Distribution by Mutation</h4>
+
+  {% for mutation, data in s.phenotype_distribution_by_mutation.items() %}
+  <div class="mutation-block">
+
+    <b>Mutation: {{ mutation }}</b>
+    <p>Total parents with this mutation: {{ data.total }}</p>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Symptom</th>
+          <th class="text-end">Count</th>
+          <th class="text-end">Percentage</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for symptom, stats in data.symptoms.items() %}
+        <tr>
+          <td>{{ symptom.replace("_", " ") | title }}</td>
+          <td class="text-end">{{ stats.count }}</td>
+          <td class="text-end">{{ stats.percentage | format_float }}%</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+  {% endfor %}
+</section>
+
+<section class="section">
+  <h3>Mutation-Phenotype Concordance (Parents vs Children)</h3>
+
+  {% for entry in s.concordance_by_mutation %}
+  <div class="mutation-block mb-4">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th style="width: 150px;">Family ID</th>
+          <td>{{ entry.family_id }}</td>
+        </tr>
+        <tr>
+          <td>Mutation</td>
+          <td>{{ entry.mutation }}</td>
+        </tr>
+        <tr>
+          <td>Parent role</td>
+          <td>{{ entry.parent_role }}</td>
+        </tr>
+        <tr>
+          <td>Child symptoms</td>
+          <td>
+            {% for symptom in entry.child_symptoms %}
+              <span class="symptom">{{ symptom }}</span>
+            {% endfor %}
+            {% if not entry.child_symptoms %}
+              <span class="text-muted">None</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>Parent symptoms</td>
+          <td>
+            {% for symptom in entry.parent_symptoms %}
+              <span class="symptom">{{ symptom }}</span>
+            {% endfor %}
+            {% if not entry.parent_symptoms %}
+              <span class="text-muted">None</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>Shared symptoms</td>
+          <td>
+            {% for symptom in entry.shared_symptoms %}
+              <span class="symptom">{{ symptom }}</span>
+            {% endfor %}
+            {% if not entry.shared_symptoms %}
+              <span class="text-muted">None</span>
+            {% endif %}
+          </td>
+        </tr>
+
+        <tr>
+          <td>Discordant symptoms</td>
+          <td>
+            {% for symptom in entry.discordant_symptoms %}
+              <span class="symptom">{{ symptom }}</span>
+            {% endfor %}
+            {% if not entry.discordant_symptoms %}
+              <span class="text-muted">None</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>Concordance score</td>
+          <td>{{ entry.concordance_score | format_float }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+</section>
+
+
+{% endmacro %}

@@ -8,7 +8,6 @@ from .episode_duration import EpisodeDuration
 from .fever_trigger import FeverTrigger
 from .gender import Gender
 from .mucocutaneous import Mucocutaneous
-from .mutation import Mutation
 from .optional_bool import OptionalBool
 from .temperature_category import TemperatureCategory
 from .therapy_response import TherapyResponse
@@ -32,7 +31,7 @@ class Child:
     parents_consanguineous: OptionalBool
     familiality: OptionalBool
 
-    mutation: Mutation
+    mutation: str
 
     fever: OptionalBool
     temperature_category: TemperatureCategory

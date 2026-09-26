@@ -2,9 +2,39 @@ table {
   width: 100%;
   table-layout: fixed;
 
+  td, th {
+    border: 1px solid #ccc;
+  }
+
   .spacer-row {
     td {
       height: 1rem;
+    }
+  }
+}
+
+.table>:not(caption)>*>* {
+  padding: 4px;
+}
+
+.table.family-registry-table {
+
+  &>:not(:last-child)>:last-child>* {
+    border-bottom-color: inherit;
+  }
+
+}
+
+.symptom {
+  &::after {
+    content: "|";
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+
+  &:last-child {
+    &::after {
+      content: "";
     }
   }
 }

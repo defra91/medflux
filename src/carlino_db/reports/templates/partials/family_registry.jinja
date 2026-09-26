@@ -1,0 +1,41 @@
+{% macro render_family_registry(families) %}
+
+<div class="table-responsive">
+  <table class="table family-registry-table">
+    <thead>
+      <tr>
+        <th style="width: 75px">Family ID</th>
+        <th style="width: 75px">Role</th>
+        <th style="width: 75px">Mutation</th>
+        <th style="width: 75px">Proband</th>
+        <th>Symptoms</th>
+      </tr>
+    </thead>
+      {% for family in families %}
+      <tbody>
+      {% for component in family.components %}
+        <tr>
+          <td>{{ family.id }}</td>
+          <td>{{ component.role }}</td>
+          <td>{{ component.mutation }}</td>
+          <td>
+            {% if component.is_proband %}
+              ✔
+            {% endif %}
+          </td>
+          <td>
+          {% if component.symptoms %}
+            {% for symptom in component.symptoms %}
+              <span class="symptom">{{ symptom }}</span>
+            {% endfor %}
+          {% endif %}
+
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      {% endfor %}
+  </table>
+</div>
+
+{% endmacro %}

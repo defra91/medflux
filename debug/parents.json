@@ -3,6 +3,7 @@
     "family_id": "GE-F0001",
     "parental_role": "mother",
     "mutation": "L695A",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -25,13 +26,13 @@
     "tonsillectomy": false,
     "appendicectomy": true,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0002",
     "parental_role": "mother",
     "mutation": "E148Q",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -54,13 +55,13 @@
     "tonsillectomy": true,
     "appendicectomy": true,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0003",
     "parental_role": "father",
     "mutation": "L695A",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -83,13 +84,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0004",
     "parental_role": "mother",
     "mutation": "A289V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -112,13 +113,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0005",
     "parental_role": "mother",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -141,13 +142,13 @@
     "tonsillectomy": true,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0006",
     "parental_role": "father",
     "mutation": "V726A",
+    "consanguinity": null,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -170,13 +171,13 @@
     "tonsillectomy": null,
     "appendicectomy": null,
     "improvement_in_adulthood": null,
-    "family_respiratory_infections_chronic": null,
-    "consanguinity": null
+    "family_respiratory_infections_chronic": null
   },
   {
     "family_id": "GE-F0007",
     "parental_role": "mother",
     "mutation": "m694V",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -199,13 +200,13 @@
     "tonsillectomy": true,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0008-",
     "parental_role": "unknown",
     "mutation": "A408Q/P269S in cis",
+    "consanguinity": null,
     "recurrent_fever": null,
     "temperature_category": "not_present",
     "episode_duration": "unknown",
@@ -228,13 +229,13 @@
     "tonsillectomy": null,
     "appendicectomy": null,
     "improvement_in_adulthood": null,
-    "family_respiratory_infections_chronic": null,
-    "consanguinity": null
+    "family_respiratory_infections_chronic": null
   },
   {
     "family_id": "GE-F0009",
     "parental_role": "mother",
     "mutation": "E148Q",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -257,13 +258,13 @@
     "tonsillectomy": true,
     "appendicectomy": true,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0010",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": true,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -286,13 +287,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": true
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0011",
     "parental_role": "mother",
     "mutation": "A289V",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": ">72h",
@@ -315,13 +316,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0012",
     "parental_role": "mother",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -344,13 +345,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0013",
     "parental_role": "father",
     "mutation": "M528V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -373,13 +374,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "GE-F0014",
     "parental_role": "mother",
     "mutation": "M680I",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -402,13 +403,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0015",
     "parental_role": "mother",
     "mutation": "K695R",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": ">72h",
@@ -431,13 +432,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "GE-F0016",
     "parental_role": "father",
     "mutation": "m694v",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -460,13 +461,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "GE-Foo17",
     "parental_role": "father",
     "mutation": "M680I",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -489,13 +490,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0001",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -518,13 +519,13 @@
     "tonsillectomy": true,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0002",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": true,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -547,13 +548,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": true
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0003",
     "parental_role": "father",
     "mutation": "M694I",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -576,13 +577,13 @@
     "tonsillectomy": true,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0004",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -605,13 +606,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0005",
     "parental_role": "father",
     "mutation": "V726A",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -634,13 +635,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0006",
     "parental_role": "mother",
     "mutation": "M694V",
+    "consanguinity": true,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -663,13 +664,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": true
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0007",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": ">72h",
@@ -692,13 +693,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0008",
     "parental_role": "father",
     "mutation": "A744S",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -721,13 +722,13 @@
     "tonsillectomy": true,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0009",
     "parental_role": "mother",
     "mutation": "M680I",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -750,13 +751,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0010",
     "parental_role": "mother",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "12–72h",
@@ -779,13 +780,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0011",
     "parental_role": "father",
     "mutation": "R761H",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -808,13 +809,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0012",
     "parental_role": "father",
     "mutation": "M680I",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -837,13 +838,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": null,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0013",
     "parental_role": "father",
     "mutation": "M680I",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -866,13 +867,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": null,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0014",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -895,13 +896,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0015",
     "parental_role": "father",
     "mutation": "V726A",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -924,13 +925,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0016",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "12–72h",
@@ -953,13 +954,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0017",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -982,13 +983,13 @@
     "tonsillectomy": true,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0018",
     "parental_role": "mother",
     "mutation": "M649V",
+    "consanguinity": true,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "12–72h",
@@ -1011,13 +1012,13 @@
     "tonsillectomy": false,
     "appendicectomy": true,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": true
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0019",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -1040,13 +1041,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0020",
     "parental_role": "mother",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": true,
     "temperature_category": "≥38°C",
     "episode_duration": "12–72h",
@@ -1069,13 +1070,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": true,
-    "family_respiratory_infections_chronic": true,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": true
   },
   {
     "family_id": "CZ-F0021",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "<12h",
@@ -1098,13 +1099,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0022",
     "parental_role": "father",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "12–72h",
@@ -1127,13 +1128,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0023",
     "parental_role": "mother",
     "mutation": "V726A",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": ">72h",
@@ -1156,13 +1157,13 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   },
   {
     "family_id": "CZ-F0024",
     "parental_role": "mother",
     "mutation": "M694V",
+    "consanguinity": false,
     "recurrent_fever": false,
     "temperature_category": "<38°C",
     "episode_duration": "12–72h",
@@ -1185,7 +1186,6 @@
     "tonsillectomy": false,
     "appendicectomy": false,
     "improvement_in_adulthood": false,
-    "family_respiratory_infections_chronic": false,
-    "consanguinity": false
+    "family_respiratory_infections_chronic": false
   }
 ]

@@ -3,6 +3,7 @@ from datetime import datetime
 
 from ..domain.family import Family
 from ..statistics.models.statistics import Statistics
+from .genetic_variant_distribution import GeneticVariantDistributionVM
 
 
 @dataclass
@@ -27,3 +28,8 @@ class ReportViewModel:
     version: str | None = None
     author: str | None = None
     created_at: datetime = field(default_factory=datetime.now)
+
+    total_families: int | None = None
+    total_children: int | None = None
+
+    genetic_variant_distribution: GeneticVariantDistributionVM | None = None

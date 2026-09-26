@@ -41,7 +41,7 @@ def map_child(patient_record: PatientRecord) -> Child:
         parents_consanguineous=map_optional_bool(patient_record.genitori_consanguinei),
         familiality=map_optional_bool(patient_record.familiarita),
         # Genetics
-        mutation=map_mutation(patient_record.genetica),
+        mutation=patient_record.genetica,
         # Fever & episodes
         fever=map_optional_bool(patient_record.febbre),
         temperature_category=map_temperature_category(patient_record.tc_max),
