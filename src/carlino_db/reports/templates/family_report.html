@@ -4,91 +4,99 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% for style in vm.style_links %}
-            <link rel="stylesheet" href="{{ style }}">
-        {% endfor %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="bootstrap.min.css">
-        <link rel="stylesheet" href="report.css">
+  {% for style in vm.style_links %}
+  <link rel="stylesheet" href="{{ style }}">
+  {% endfor %}
 
-        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="report.css">
 
-        <title>{{ vm.title }}</title>
-    </head>
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
 
-    <body>
+  <title>{{ vm.title }}</title>
+</head>
 
-        <div class="report-header mb-4">
-            <div class="row align-items-center">
+<body>
+  <div class="container-fluid">
+    <div class="report-header mb-4">
+      <div class="row align-items-center">
 
-                <!-- Left side: Title -->
-                <div class="col-8">
-                    <h1 class="report-title">{{ vm.title }}</h1>
+        <!-- Left side: Title -->
+        <div class="col-8">
+          <h1 class="report-title">{{ vm.title }}</h1>
 
-                    {% if vm.subtitle %}
-                        <div class="report-subtitle">{{ vm.subtitle }}</div>
-                    {% endif %}
-                </div>
-
-                <!-- Right side: Metadata -->
-                <div class="col-4 text-end report-meta">
-
-                    {% if vm.created_at %}
-                        <div class="meta-item">
-                            <strong>Date:</strong>
-                            {{ vm.created_at.strftime("%Y-%m-%d %H:%M") }}
-                        </div>
-                    {% endif %}
-
-                    <div class="meta-item">
-                        <strong>Families:</strong>
-                        {{ vm.families|length }}
-                    </div>
-
-                    <div class="meta-item">
-                        <strong>Version:</strong>
-                        {{ vm.version }}
-                    </div>
-
-                    <div class="meta-item">
-                        <strong>Author:</strong>
-                        {{ vm.author }}
-                    </div>
-                </div>
-            </div>
+          {% if vm.subtitle %}
+          <div class="report-subtitle">{{ vm.subtitle }}</div>
+          {% endif %}
         </div>
 
-        {% if vm.statistics %}
-            <h2>Statistics</h2>
-            {{ statistics_template.render_statistics(vm.statistics) }}
-        {% endif %}
+        <!-- Right side: Metadata -->
+        <div class="col-4 text-end report-meta">
 
-        <h2>Families Catalog</h2>
-        <div class="table-container">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>Family ID</th>
-                        <th>Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for family in vm.families %}
-                        {% for component in family.components %}
-                            <tr>
-                                <td>{{ family.id }}</td>
-                                <td>{{ component.role }}</td>
-                            </tr>
-                        {% endfor %}
-                    {% endfor %}
-                </tbody>
-            </table>
+          {% if vm.created_at %}
+          <div class="meta-item">
+            <label>Date:</label>
+            <span class="meta-value">{{ vm.created_at.strftime("%Y-%m-%d %H:%M") }}</span>
+          </div>
+          {% endif %}
+
+          <div class="meta-item">
+            <label>Families:</label>
+            <span class="meta-value">{{ vm.families|length }}</span>
+          </div>
+
+          <div class="meta-item">
+            <label>Version:</label>
+            <span class="meta-value">{{ vm.version }}</span>
+          </div>
+
+          <div class="meta-item">
+            <label>Author:</label>
+            <span class="meta-value">{{ vm.author }}</span>
+          </div>
         </div>
+      </div>
+    </div>
+
+    {% if vm.statistics %}
+    <h2>Aggregate Clinical and Genetic Metrics</h2>
+    {{ statistics_template.render_statistics(vm.statistics) }}
+    {% endif %}
+
+    <h2>Family Registry</h2>
+    <div class="table-container">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Family ID</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for family in vm.families %}
+          {% for component in family.components %}
+          <tr>
+            <td>{{ family.id }}</td>
+            <td>{{ component.role }}</td>
+          </tr>
+          {% endfor %}
+          <tr class="spacer-row">
+            <td colspan="2"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
-    </body>
+
+
+</body>
+
 </html>

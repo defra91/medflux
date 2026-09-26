@@ -8,6 +8,7 @@ from .reports.pdf import html_to_pdf
 from .reports.renderer import render_family_report
 from .services.family_builder import build_families
 from .statistics.statistics_calculation import calculate_statistics
+from .utilities.style_utilities import compile_sass
 from .view_models.report_viewmodel_builder import build_report_viewmodel
 
 
@@ -34,7 +35,7 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
 
     # Configure logging
     logging.basicConfig(
-        level=logging.DEBUG if verbose else logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
+        level=logging.DEBUG if verbose else logging.ERROR, format="%(asctime)s [%(levelname)s] %(message)s"
     )
 
     logging.info("Starting Carlino DB processing pipeline...")
@@ -52,14 +53,6 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
     parents = [map_parent(fr) for fr in family_records]
     children = [map_child(pr) for pr in patient_records]
 
-    # Debug export
-    if debug:
-        logging.debug("Debug mode enabled: exporting raw mapped JSON files.")
-        from .writer import write_json
-
-        write_json(parents, "parents.json")
-        write_json(children, "children.json")
-
     # Build Family objects
     families = build_families(children, parents)
     logging.info(f"Built {len(families)} Family objects.")
@@ -71,9 +64,21 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
     # Build view model
     vm = _build_report_viewmodel(families=families, statistics=statistics, target="pdf")
 
+    # Build sass
+    compile_sass()
+
     # Render HTML and convert to PDF
     logging.info("Rendering HTML report...")
     html = render_family_report(vm)
+
+    # Debug export
+    if debug:
+        logging.debug("Debug mode enabled: exporting raw mapped JSON files.")
+        from .writer import write_json
+
+        write_json(parents, "parents.json")
+        write_json(children, "children.json")
+        write_json(families, "families.json")
 
     if debug:
         vm_debug = _build_report_viewmodel(families=families, statistics=statistics, target="html")

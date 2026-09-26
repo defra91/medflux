@@ -1,0 +1,10 @@
+table {
+  width: 100%;
+  table-layout: fixed;
+
+  .spacer-row {
+    td {
+      height: 1rem;
+    }
+  }
+}
