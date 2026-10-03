@@ -1,13 +1,13 @@
 import unittest
 
-from carlino_db.domain.child import Child
-from carlino_db.domain.episode_duration import EpisodeDuration
-from carlino_db.domain.family import Family
-from carlino_db.domain.gender import Gender
-from carlino_db.domain.parent import Parent
-from carlino_db.domain.parental_role import ParentalRole
-from carlino_db.domain.temperature_category import TemperatureCategory
-from carlino_db.statistics.charts_calculator import calculate_phenotypic_concordance_chart
+from medflux.domain.child import Child
+from medflux.domain.episode_duration import EpisodeDuration
+from medflux.domain.family import Family
+from medflux.domain.gender import Gender
+from medflux.domain.parent import Parent
+from medflux.domain.parental_role import ParentalRole
+from medflux.domain.temperature_category import TemperatureCategory
+from medflux.statistics.charts_calculator import calculate_phenotypic_concordance_chart
 
 
 def make_child(family_id: str, mutation: str = "MEFV") -> Child:
@@ -28,19 +28,20 @@ def make_child(family_id: str, mutation: str = "MEFV") -> Child:
         episodes_per_year=12,
         fever_trigger=None,
         abdominal_pain=True,
+        chest_pain=True,
+        headache=False,
+        asthenia=False,
+        has_tonsillitis=False,
         diarrhea=False,
         constipation=False,
         vomiting=False,
         abdominal_surgery=None,
-        chest_pain=True,
         pericarditis=False,
         pleuritis=False,
         arthralgia=False,
         arthritis=False,
         myalgia=False,
         bone_pain=False,
-        headache=False,
-        asthenia=False,
         erysipelas_like=False,
         mucocutaneous=None,
         other_manifestations="",
@@ -51,6 +52,8 @@ def make_child(family_id: str, mutation: str = "MEFV") -> Child:
         biological_therapy=False,
         amyloidosis=None,
         concomitant_diseases="",
+        has_aphthosis=False,
+        osteoarticular_pain=False,
     )
 
 
@@ -66,13 +69,15 @@ def make_parent(family_id: str, *, mutation: str = "MEFV") -> Parent:
         abdominal_pain=True,
         chest_pain=True,
         headache=False,
+        asthenia=False,
+        has_tonsillitis=False,
         osteoarticular_pain=False,
         aphthosis_with_fever=False,
         aphthosis_without_fever=False,
+        has_aphthosis=False,
         erythematous_tonsillitis=False,
         exudative_tonsillitis=False,
         cutaneous_manifestations=False,
-        asthenia=False,
         respiratory_infections_chronic=False,
         fever_in_adulthood=False,
         family_amyloidosis=False,
