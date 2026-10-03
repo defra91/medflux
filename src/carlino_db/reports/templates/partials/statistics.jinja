@@ -2,5 +2,87 @@
 {% import 'partials/statistics_charts.jinja' as stats_charts %}
 
 {% macro render_statistics(s) %}
-{{ stats_charts.render_statistics_charts(s) }}
+
+  <h3>P-value del miglioramento clinico in età adulta</h3>
+
+  <b>{{ s.adult_onset_improvement_pvalue | format_float }}</b>
+
+  <h3>P-values dei sintomi</h3>
+  <table class="table table-symptoms-pvalues">
+    <thead>
+      <tr>
+        <th>Sintomo</th>
+        <th class="text-end">P-value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for symptom, pvalue in s.symptoms_pvalues.items() %}
+        <tr>
+          <td>{{ symptom }}</td>
+          <td class="text-end">{{ pvalue | format_float }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Numero di genitori con Eurofever</h3>
+  <b>{{ s.parents_cnt_with_eurofever }}</b>
+
+  {{ stats_charts.render_statistics_charts(s) }}
+
+  {% if s.fmf_demographic_genotypic_stats %}
+      <h3>Caratteristiche demografiche e genotipiche dei pazienti con FMF</h3>
+
+      <table class="table table-fmf-demographic-genotypic-stats">
+        <thead>
+          <tr>
+            <th>Caratteristica</th>
+            <th>Sottogruppo</th>
+            <th class="text-end">Numero (N)</th>
+            <th class="text-end">Percentuale (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Sesso</th>
+            <td>Maschile</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.count_m }}</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.percentage_m | format_float }}%</td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>Femminile</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.count_f }}</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.percentage_f | format_float }}%</td>
+          </tr>
+          <tr>
+            <th>Provenienza geografica</th>
+            <td>Locale</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.count_origin_local }}</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.percentage_origin_local | format_float }}%</td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>Estera</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.count_origin_foreign }}</td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.percentage_origin_foreign | format_float }}%</td>
+          </tr>
+          <tr>
+            <th>Età media di esordio dei sintomi</th>
+            <td colspan="2"></td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.average_onset_age | format_float }} anni</td>
+          </tr>
+          <tr>
+            <th>Differenza media tra diagnosi dei sintomi ed esordio</th>
+            <td colspan="2"></td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.average_difference_diagnosis_onset | format_float }} anni</td>
+          </tr>
+          <tr>
+            <th>Percentuale di pazienti con terapia biologica</th>
+            <td colspan="2"></td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.percentage_biologic_theraphy | format_float }}%</td>
+          </tr>
+        </tbody>
+      </table>
+  {% endif %}
 {% endmacro %}

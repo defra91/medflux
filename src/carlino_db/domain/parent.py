@@ -21,12 +21,17 @@ class Parent:
     headache: bool
     asthenia: bool
 
+    has_tonsillitis: bool
+
     recurrent_fever: bool
     temperature_category: TemperatureCategory
     episode_duration: EpisodeDuration
     osteoarticular_pain: bool
+
     aphthosis_with_fever: bool
     aphthosis_without_fever: bool
+    has_aphthosis: bool
+
     erythematous_tonsillitis: bool
     exudative_tonsillitis: bool
     cutaneous_manifestations: bool

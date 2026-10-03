@@ -5,8 +5,8 @@ from .base_mappers import (
     map_episode_duration,
     map_family_id,
     map_int,
+    map_mutation,
     map_parental_role,
-    map_str,
     map_temperature_category,
 )
 
@@ -18,18 +18,24 @@ def map_parent(family_record: FamilyRecord) -> Parent:
 
     family_id = map_family_id(family_record.family_id)
     parental_role = map_parental_role(family_record.padre_madre)
-    mutation = map_str(family_record.mutazione.upper())
+
+    mutation = map_mutation(family_record.mutazione)
+
     recurrent_fever = map_boolean(family_record.febbre_ricorrente)
     temperature_category = map_temperature_category(family_record.t_max)
     episode_duration = map_episode_duration(family_record.durata)
     abdominal_pain = map_boolean(family_record.dol_addominale)
-    chest_pain = map_boolean(family_record.dol_toracico)
+    chest_pain = map_boolean(family_record.dol_toracico, ("2",))
     headache = map_boolean(family_record.cefalea)
     osteoarticular_pain = map_boolean(family_record.dol_osteoarticolari)
+
+    erythematous_tonsillitis = map_boolean(family_record.tonsillite_eritematosa, ("2",))
+    exudative_tonsillitis = map_boolean(family_record.tonsillite_essudativa, ("2",))
+    has_tonsillitis = erythematous_tonsillitis or exudative_tonsillitis
+
     aphthosis_with_fever = map_boolean(family_record.aftosi_con_febbre)
     aphthosis_without_fever = map_boolean(family_record.aftosi_senza_febbre)
-    erythematous_tonsillitis = map_boolean(family_record.tonsillite_eritematosa)
-    exudative_tonsillitis = map_boolean(family_record.tonsillite_essudativa)
+    has_aphthosis = map_boolean(family_record.aftosi_con_febbre) or map_boolean(family_record.aftosi_senza_febbre)
     cutaneous_manifestations = map_boolean(family_record.man_cutanee)
     asthenia = map_boolean(family_record.astenia)
     respiratory_infections_chronic = map_boolean(family_record.irc)
@@ -55,8 +61,14 @@ def map_parent(family_record: FamilyRecord) -> Parent:
         chest_pain=chest_pain,
         headache=headache,
         osteoarticular_pain=osteoarticular_pain,
+
+        has_tonsillitis=has_tonsillitis,
+
+        # Aphthosis-related
         aphthosis_with_fever=aphthosis_with_fever,
         aphthosis_without_fever=aphthosis_without_fever,
+        has_aphthosis=has_aphthosis or aphthosis_without_fever,
+
         erythematous_tonsillitis=erythematous_tonsillitis,
         exudative_tonsillitis=exudative_tonsillitis,
         cutaneous_manifestations=cutaneous_manifestations,

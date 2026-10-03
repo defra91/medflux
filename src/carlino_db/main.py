@@ -53,6 +53,11 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
     parents = [map_parent(fr) for fr in family_records]
     children = [map_child(pr) for pr in patient_records]
 
+    children_with_abdominal_pain = [child for child in children if child.abdominal_pain]
+    logging.info(f"Found {len(children_with_abdominal_pain)} children with abdominal pain.")
+    parents_with_abdominal_pain = [parent for parent in parents if parent.abdominal_pain]
+    logging.info(f"Found {len(parents_with_abdominal_pain)} parents with abdominal pain.")
+
     # Build Family objects
     families = build_families(children, parents)
     logging.info(f"Built {len(families)} Family objects.")

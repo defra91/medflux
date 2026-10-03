@@ -1,22 +1,12 @@
 from dataclasses import dataclass
 
-from .concordance_stats import ConcordanceStats
-from .family_stats import FamilyStats
-from .mutation_group_stats import MutationGroupStats
-from .parent_stats import ParentStats
-from .proband_stats import ProbandStats
+from .fmf_semograpic_genotypic_stats import FMFDemographicGenotypicStats
 from .statistics_chart import StatisticsChart
 
 
 @dataclass
 class Statistics:
     """Contenitore completo di tutte le statistiche del progetto."""
-
-    families: FamilyStats
-    probands: ProbandStats
-    parents: ParentStats
-    concordance: ConcordanceStats
-    mutation_groups: dict[str, MutationGroupStats]
 
     proband_distribution: list[dict]
     parent_distribution: list[dict]
@@ -26,3 +16,11 @@ class Statistics:
     concordance_by_mutation: list[dict]
 
     charts: list[StatisticsChart]
+
+    fmf_demographic_genotypic_stats: FMFDemographicGenotypicStats
+
+    symptoms_pvalues: dict[str, float]
+
+    adult_onset_improvement_pvalue: float
+
+    parents_cnt_with_eurofever: int

@@ -1,3 +1,5 @@
+import re
+
 from ..domain.abdominal_surgery import AbdominalSurgery
 from ..domain.amyloidosis import Amyloidosis
 from ..domain.child import Child
@@ -5,6 +7,35 @@ from ..domain.episode_duration import EpisodeDuration
 from ..domain.fever_trigger import FeverTrigger
 from ..domain.mucocutaneous import Mucocutaneous
 from ..domain.temperature_category import TemperatureCategory
+
+
+def child_has_aphthosis(mucocutaneous_raw: str, other_manifestations: str) -> bool:
+
+    result_mucocutaneous_raw = (
+        bool(
+            re.search(r"\baftosi\b", mucocutaneous_raw, flags=re.IGNORECASE)
+        ) or bool(
+            re.search(r"\baftori\b", mucocutaneous_raw, flags=re.IGNORECASE)
+        ) or bool(
+            re.search(r"\bafte\b", mucocutaneous_raw, flags=re.IGNORECASE)
+        )
+        if mucocutaneous_raw is not None and mucocutaneous_raw.strip() != ""
+        else False
+    )
+
+    result_other_manifestations = (
+        bool(
+            re.search(r"\baftosi\b", other_manifestations, flags=re.IGNORECASE)
+        ) or bool(
+            re.search(r"\baftori\b", other_manifestations, flags=re.IGNORECASE)
+        ) or bool(
+            re.search(r"\bafte\b", other_manifestations, flags=re.IGNORECASE)
+        )
+        if other_manifestations is not None and other_manifestations.strip() != ""
+        else False
+    )
+
+    return result_mucocutaneous_raw or result_other_manifestations
 
 
 def extract_child_symptoms(child: Child) -> list[str]:

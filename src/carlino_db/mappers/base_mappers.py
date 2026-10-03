@@ -1,3 +1,5 @@
+import re
+
 from ..domain.abdominal_surgery import AbdominalSurgery
 from ..domain.amyloidosis import Amyloidosis
 from ..domain.collateral_effects import CollateralEffects
@@ -6,12 +8,30 @@ from ..domain.episode_duration import EpisodeDuration
 from ..domain.fever_trigger import FeverTrigger
 from ..domain.gender import Gender
 from ..domain.mucocutaneous import Mucocutaneous
-from ..domain.mutation import Mutation
 from ..domain.optional_bool import OptionalBool
 from ..domain.parental_role import ParentalRole
 from ..domain.temperature_category import TemperatureCategory
 from ..domain.therapy_response import TherapyResponse
+from ..models.patient_record import PatientRecord
 
+
+def map_mutation(raw: str | None) -> str | None:
+    if raw is None:
+        return None
+
+    s = raw.strip()
+
+    s = s.replace("c.2177T>C ete", "V726A")
+
+
+    s = s.replace("ete", "")
+    s = s.replace("in cis", "")
+
+    s = s.replace("M680I", "M6801")
+
+    s = s.upper().strip()
+
+    return s if s else None
 
 def map_str(raw: str | None) -> str | None:
     if raw is None:
@@ -30,7 +50,7 @@ def map_float(raw: str | None) -> float | None:
         return None
 
 
-def map_boolean(value: str | None) -> bool | None:
+def map_boolean(value: str | None, other_true_values: tuple[str, ...] = ()) -> bool | None:
     """
     Maps a string representation of a boolean value to a Python boolean.
     Returns None if the input is None or cannot be interpreted as a boolean.
@@ -40,7 +60,7 @@ def map_boolean(value: str | None) -> bool | None:
 
     s = value.strip().upper()
 
-    if s in ("1", "1.0", "YES", "Y", "TRUE", "T", "SI", "S", "SÌ"):
+    if s in ("1", "1.0", "YES", "Y", "TRUE", "T", "SI", "S", "SÌ") + other_true_values:
         return True
 
     if s in ("0", "0.0", "NO", "N", "FALSE", "F"):
@@ -162,7 +182,7 @@ def map_country(raw: str | None) -> Country | None:
 
     s = raw.strip().upper()
 
-    if s in ("1", "1.0", "ITALIA"):
+    if s in ("1", "1.0", "", "ITALIA"):
         return Country.ITALY
 
     if s in ("0", "0.0", "ESTERO"):
@@ -170,16 +190,6 @@ def map_country(raw: str | None) -> Country | None:
 
     # Covers NC, empty strings, malformed values
     return Country.UNKNOWN
-
-
-def map_mutation(raw: str | None) -> Mutation:
-    if raw is None:
-        return Mutation.UNKNOWN
-    s = raw.strip().upper()
-    for m in Mutation:
-        if m.value == s:
-            return m
-    return Mutation.UNKNOWN
 
 
 def map_fever_trigger(raw: str | None) -> FeverTrigger:
@@ -237,6 +247,36 @@ def normalize_mucocutaneous_token(token: str) -> str:
     t = t.replace("CUTANEA IPERCROMICHE DIFFUSE", "MANIFESTAZIONI CUTANEA IPERCROMICHE DIFFUSE")
 
     return t
+
+
+def map_has_tonsillitis(patient_record: PatientRecord, mucocutaneous_raw: str, other: str | None) -> bool:
+
+    mucocutaneous_normalized = mucocutaneous_raw.strip().upper() if mucocutaneous_raw is not None else ""
+    other_normalized = other.strip().upper() if other is not None else ""
+
+    result = bool(
+        re.search(r"\bfaringotonsillite essudativa\b", mucocutaneous_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringotonsillite eritematosa\b", mucocutaneous_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringite essudativa\b", mucocutaneous_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringotonsillite\b", mucocutaneous_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringodinia\b", mucocutaneous_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringotonsillite essudativa\b", other_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringotonsillite eritematosa\b", other_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringite essudativa\b", other_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringotonsillite\b", other_normalized, flags=re.IGNORECASE)
+    ) or bool(
+        re.search(r"\bfaringodinia\b", other_normalized, flags=re.IGNORECASE)
+    )
+
+    return result
 
 
 def map_mucocutaneous(raw: str | None) -> Mucocutaneous:

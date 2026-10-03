@@ -1,9 +1,11 @@
 .chart-container {
+  page-break-inside: avoid;
+  break-inside: avoid;
   margin-bottom: 16px;
   padding-bottom: 16px;
 
   .img-container {
-    width: 400px;
+    width: 300px;
     margin-left: auto;
     margin-right: auto;
   }

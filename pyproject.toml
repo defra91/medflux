@@ -20,6 +20,7 @@ dependencies = [
     "pydantic>=2.13.5",
     "pyppeteer>=2.0.0",
     "ruff>=0.16.9",
+    "scipy>=1.18.1",
     "tinycss2>=1.5.1",
     "weasyprint>=70.0",
 ]

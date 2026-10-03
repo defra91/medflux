@@ -57,11 +57,27 @@ table {
 .symptom:last-child::after {
   content: ""; }
 
+.table.table-fmf-demographic-genotypic-stats th, .table.table-fmf-demographic-genotypic-stats td {
+  border: 2px solid #fff; }
+
+.table.table-fmf-demographic-genotypic-stats th {
+  background-color: #165f82;
+  color: #fff;
+  font-weight: bold; }
+
+.table.table-fmf-demographic-genotypic-stats tbody tr:nth-child(even) td {
+  background-color: #c1e3f3; }
+
+.table.table-fmf-demographic-genotypic-stats tbody tr:nth-child(odd) td {
+  background-color: #83caeb; }
+
 .chart-container {
+  page-break-inside: avoid;
+  break-inside: avoid;
   margin-bottom: 16px;
   padding-bottom: 16px; }
   .chart-container .img-container {
-    width: 400px;
+    width: 300px;
     margin-left: auto;
     margin-right: auto; }
 
@@ -223,12 +239,3 @@ li {
   font-size: 9.5pt;
   color: var(--thesis-muted);
   margin-bottom: 0.35cm; }
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border: 1px solid var(--thesis-line);
-  border-radius: 6px;
-  background: #fff; }

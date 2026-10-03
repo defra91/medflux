@@ -1,31 +1,44 @@
 from collections import Counter
 
+from ..domain.episode_duration import EpisodeDuration
 from ..domain.family import Family
 from ..domain.parent import Parent
 
 
+def pathogenic_mutations() -> set[str]:
+    return {
+        "M694V",
+        "M680I",
+        "V726A",
+        "M694I",
+        "A744S",
+        "E148Q",
+        "R761H",
+        "L695A",
+        "A289V",
+        "M528V",
+        "K695R"
+    }
+
+
 def satisfies_eurofever(parent: Parent) -> bool:
     # Mutazioni MEFV patogenetiche secondo PRINTO/Eurofever
-    pathogenic_mutations = {
-        "M694V", "M680I", "V726A", "M694I", "A744S", "E148Q"
-    }
+
+    bad_fever = parent.recurrent_fever and (parent.episode_duration == EpisodeDuration.BETWEEN_12_AND_72H or parent.episode_duration == EpisodeDuration.MORE_THAN_72H)
 
     # Criteri clinici FMF mappati sulla tua classe Parent
     clinical_criteria = [
-        parent.recurrent_fever,
-        parent.abdominal_pain,
+        bad_fever,
         parent.chest_pain,
-        parent.osteoarticular_pain,
-        parent.cutaneous_manifestations,
-        parent.erythematous_tonsillitis,
-        parent.exudative_tonsillitis,
+        parent.abdominal_pain,
+        parent.osteoarticular_pain
     ]
 
     # Conta quanti criteri clinici sono presenti
     num_clinical = sum(1 for c in clinical_criteria if c)
 
     # Regola Eurofever/PRINTO
-    has_pathogenic_mut = parent.mutation in pathogenic_mutations
+    has_pathogenic_mut = parent.mutation in pathogenic_mutations()
 
     return has_pathogenic_mut and num_clinical >= 2
 

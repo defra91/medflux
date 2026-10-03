@@ -21,12 +21,14 @@ class GroupedBarChart(BaseChart):
         xlabel: str | None = None,
         ylabel: str | None = None,
         colors: Sequence[str] | None = None,
+        rotation: int = 90,
     ):
         self.series = [
             (series_name, list(values)) for series_name, values in series
         ]
         self.colors = list(colors) if colors is not None else None
         super().__init__(labels, [0 for _ in labels], title, xlabel=xlabel, ylabel=ylabel)
+        self.rotation = rotation
 
         if any(len(values) != len(labels) for _, values in self.series):
             raise ValueError("Each series must contain one value for every label.")
@@ -63,7 +65,7 @@ class GroupedBarChart(BaseChart):
                 )
 
         ax.set_xticks(list(x_positions))
-        ax.set_xticklabels(self.labels)
+        ax.set_xticklabels(self.labels, rotation=self.rotation)
         ax.set_title(self.title)
 
         if self.xlabel is not None:
@@ -84,8 +86,9 @@ def build_grouped_bar_chart(
     xlabel: str | None = None,
     ylabel: str | None = None,
     colors: Sequence[str] | None = None,
+    rotation: int = 90,
 ) -> Figure:
-    return GroupedBarChart(labels, series, title, xlabel=xlabel, ylabel=ylabel, colors=colors).build_figure()
+    return GroupedBarChart(labels, series, title, xlabel=xlabel, ylabel=ylabel, colors=colors, rotation=rotation).build_figure()
 
 
 def save_grouped_bar_chart(
@@ -100,5 +103,5 @@ def save_grouped_bar_chart(
     dpi: int = 150,
     transparent: bool = False,
 ) -> Path:
-    chart = GroupedBarChart(labels, series, title, xlabel=xlabel, ylabel=ylabel, colors=colors)
+    chart = GroupedBarChart(labels, series, title, xlabel=xlabel, ylabel=ylabel, colors=colors, rotation=90)
     return chart.save(output_path, dpi=dpi, transparent=transparent)

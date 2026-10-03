@@ -25,8 +25,8 @@ class Child:
     gender: Gender
     country: Country
 
-    onset_age_years: int
-    diagnosis_age_years: int
+    onset_age_years: float | None
+    diagnosis_age_years: float | None
 
     parents_consanguineous: OptionalBool
     familiality: OptionalBool
@@ -45,6 +45,7 @@ class Child:
     headache: bool
     asthenia: bool
 
+    has_tonsillitis: bool
 
     diarrhea: bool
     constipation: bool
@@ -71,3 +72,6 @@ class Child:
 
     amyloidosis: Amyloidosis
     concomitant_diseases: str
+
+    has_aphthosis: bool
+    osteoarticular_pain: bool
