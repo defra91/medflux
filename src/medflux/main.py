@@ -31,7 +31,7 @@ def _build_report_viewmodel(families, statistics, target: str):
 
 def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = False):
     """
-    Main entry point for the Carlino DB processing pipeline.
+    Main entry point for the Medflux processing pipeline.
     """
 
     # Configure logging
@@ -39,7 +39,7 @@ def main(db_path: Path, output_path: Path, verbose: bool = False, debug: bool = 
         level=logging.DEBUG if verbose else logging.ERROR, format="%(asctime)s [%(levelname)s] %(message)s"
     )
 
-    logging.info("Starting Carlino DB processing pipeline...")
+    logging.info("Starting Medflux processing pipeline...")
     logging.info(f"Database path: {db_path}")
     logging.info(f"Output path: {output_path}")
 
