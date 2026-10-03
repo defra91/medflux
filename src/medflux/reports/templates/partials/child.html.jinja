@@ -1,0 +1,18 @@
+{% macro render_child(c) %}
+
+<div class="child">
+    <span class="label">Mutation:</span> {{ c.mutation or "N/A" }}
+    {% if c.is_proband %}<strong>(proband)</strong>{% endif %}
+    <br>
+    {% if c.symptoms %}
+        <ul>
+            {% for key, value in c.symptoms.items() %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <span class="empty">No symptoms recorded</span>
+    {% endif %}
+</div>
+
+{% endmacro %}

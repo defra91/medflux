@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from carlino_db.charts import (
+from medflux.charts import (
     save_horizontal_bar_chart,
     save_pie_chart,
     save_vertical_bar_chart,

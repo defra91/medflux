@@ -1,5 +1,5 @@
 [project]
-name = "carlino-db"
+name = "medflux"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -26,7 +26,7 @@ dependencies = [
 ]
 
 [project.scripts]
-carlino-db = "carlino_db:cli"
+medflux = "medflux:cli"
 
 [build-system]
 requires = ["uv_build>=0.12.13,<0.13.0"]

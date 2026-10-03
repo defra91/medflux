@@ -13,7 +13,7 @@ Questo progetto contiene un pipeline per la generazione di report e, ora, anche 
 ```python
 from pathlib import Path
 
-from carlino_db.charts import (
+from medflux.charts import (
     save_horizontal_bar_chart,
     save_pie_chart,
     save_vertical_bar_chart,
