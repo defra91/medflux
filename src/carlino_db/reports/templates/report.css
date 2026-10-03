@@ -63,7 +63,10 @@ table {
 .chart-container {
   padding: 16px;
   border: 1px solid #ccc;
-  border-radius: 8px; }
+  border-radius: 8px;
+  margin-bottom: 16px; }
+  .chart-container:last-child {
+    margin-bottom: 0; }
 
 @page {
   size: AA;

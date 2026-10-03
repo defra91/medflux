@@ -1,7 +1,7 @@
 import base64
 from io import BytesIO
 
-from ..charts import build_grouped_bar_chart
+from ..charts import build_grouped_bar_chart, build_vertical_bar_chart
 from ..domain.family import Family
 from .models.statistics_chart import StatisticsChart
 
@@ -10,7 +10,10 @@ def calculate_charts(families: list[Family]) -> list[StatisticsChart]:
     """
     Calculate and return the statistics charts for the provided families.
     """
-    return [calculate_adult_onset_improvement_chart(families)]
+    return [
+        calculate_adult_onset_improvement_chart(families),
+        calculate_parent_fmf_phenotype_chart(families),
+    ]
 
 
 def _encode_chart_as_data_url(chart_figure) -> str:
@@ -69,6 +72,72 @@ def calculate_adult_onset_improvement_chart(families: list[Family]) -> Statistic
         series=series,
         xlabel="Categoria di esordio",
         colors=["#ca1103", "#69A74E"],
+    )
+
+    image_url = _encode_chart_as_data_url(figure)
+
+    return StatisticsChart(
+        title=title,
+        description=description,
+        image_url=image_url,
+    )
+
+
+def calculate_parent_fmf_phenotype_chart(families: list[Family]) -> StatisticsChart:
+    """
+    Build a chart with the phenotype frequencies among parents with FMF.
+
+    The chart is ungrouped and counts how often each symptom is present in the parent records that satisfy
+    the FMF criteria. Labels remain in Italian, while the implementation is in English.
+    """
+
+    symptom_definitions = [
+        ("Febbbre ricorrente", "recurrent_fever"),
+        ("Dolore addominale", "abdominal_pain"),
+        ("Dolore toracico", "chest_pain"),
+        ("Cefalea", "headache"),
+        ("Dolore osteoarticolare", "osteoarticular_pain"),
+        ("Aftosi con febbre", "aphthosis_with_fever"),
+        ("Aftosi senza febbre", "aphthosis_without_fever"),
+        ("Tonsillite eritematosa", "erythematous_tonsillitis"),
+        ("Tonsillite essudativa", "exudative_tonsillitis"),
+        ("Manifestazioni cutanee", "cutaneous_manifestations"),
+        ("Astenia", "asthenia"),
+        ("Infezioni respiratorie croniche", "respiratory_infections_chronic"),
+        ("Febbre in età adulta", "fever_in_adulthood"),
+        ("Amiloidosi familiare", "family_amyloidosis"),
+        ("Tonsillectomia", "tonsillectomy"),
+        ("Appendicectomia", "appendicectomy"),
+        ("Infezioni respiratorie croniche familiari", "family_respiratory_infections_chronic"),
+    ]
+
+    counts: dict[str, int] = {label: 0 for label, _ in symptom_definitions}
+
+    for family in families:
+        for parent in family.parents():
+            if not parent.mutation:
+                continue
+
+            for label, attribute_name in symptom_definitions:
+                if getattr(parent, attribute_name, False):
+                    counts[label] += 1
+
+    labels = [label for label, _ in symptom_definitions]
+    values = [counts[label] for label in labels]
+
+    title = "Fenotipo dei genitori con FMF"
+    description = (
+        "Conteggio dei sintomi presenti tra i genitori con FMF. "
+        "L'istogramma mostra la frequenza di ciascun segno fenotipico osservato."
+    )
+
+    figure = build_vertical_bar_chart(
+        labels=labels,
+        values=values,
+        title=title,
+        xlabel="Sintomo",
+        color="#6c9eeb",
+        rotation=60,
     )
 
     image_url = _encode_chart_as_data_url(figure)
