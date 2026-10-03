@@ -27,13 +27,26 @@ class HorizontalBarChart(BaseChart):
 
     def build_figure(self) -> Figure:
         fig, ax = plt.subplots(figsize=(9, 7))
-        ax.barh(self.labels, self.values, color=self.color)
+        bars = ax.barh(self.labels, self.values, color=self.color)
         ax.set_title(self.title)
 
         if self.xlabel is not None:
             ax.set_xlabel(self.xlabel)
         if self.ylabel is not None:
             ax.set_ylabel(self.ylabel)
+
+        ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda value, _pos: f"{int(value)}"))
+
+        for bar in bars:
+            width = bar.get_width()
+            ax.text(
+                width + 0.05,
+                bar.get_y() + bar.get_height() / 2,
+                f"{int(width)}",
+                va="center",
+                ha="left",
+                fontsize=9,
+            )
 
         ax.invert_yaxis()
         fig.tight_layout()

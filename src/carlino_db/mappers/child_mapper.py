@@ -1,3 +1,5 @@
+import re
+
 from ..domain.child import Child
 from ..models.patient_record import PatientRecord
 from .base_mappers import (
@@ -26,6 +28,8 @@ def map_child(patient_record: PatientRecord) -> Child:
     Map a PatientRecord to a Child domain model.
     """
 
+    altro = patient_record.altro or ""
+
     return Child(
         # Identifiers
         centre_id=map_str(patient_record.centre_id),
@@ -41,7 +45,7 @@ def map_child(patient_record: PatientRecord) -> Child:
         parents_consanguineous=map_optional_bool(patient_record.genitori_consanguinei),
         familiality=map_optional_bool(patient_record.familiarita),
         # Genetics
-        mutation=patient_record.genetica,
+        mutation=patient_record.genetica.upper(),
         # Fever & episodes
         fever=map_optional_bool(patient_record.febbre),
         temperature_category=map_temperature_category(patient_record.tc_max),
@@ -76,4 +80,12 @@ def map_child(patient_record: PatientRecord) -> Child:
         # Complications / comorbidities
         amyloidosis=map_amyloidosis(patient_record.amiloidosi),
         concomitant_diseases=map_str(patient_record.malattie_concomitanti),
+
+        headache=bool(
+            re.search(r"\bcefalea\b", altro, flags=re.IGNORECASE)
+        ),
+
+        asthenia=bool(
+            re.search(r"\bastenia\b", altro, flags=re.IGNORECASE)
+        ),
     )

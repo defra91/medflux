@@ -15,19 +15,21 @@ class Parent:
 
     consanguinity: bool
 
-    recurrent_fever: bool
-    temperature_category: TemperatureCategory
-    episode_duration: EpisodeDuration
+    # Comparable symptoms
     abdominal_pain: bool
     chest_pain: bool
     headache: bool
+    asthenia: bool
+
+    recurrent_fever: bool
+    temperature_category: TemperatureCategory
+    episode_duration: EpisodeDuration
     osteoarticular_pain: bool
     aphthosis_with_fever: bool
     aphthosis_without_fever: bool
     erythematous_tonsillitis: bool
     exudative_tonsillitis: bool
     cutaneous_manifestations: bool
-    asthenia: bool
     respiratory_infections_chronic: bool
     fever_in_adulthood: bool
     family_amyloidosis: bool

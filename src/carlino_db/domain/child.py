@@ -39,13 +39,18 @@ class Child:
     episodes_per_year: int
     fever_trigger: FeverTrigger
 
+    # Comparable symptoms
     abdominal_pain: bool
+    chest_pain: bool
+    headache: bool
+    asthenia: bool
+
+
     diarrhea: bool
     constipation: bool
     vomiting: bool
     abdominal_surgery: AbdominalSurgery
 
-    chest_pain: bool
     pericarditis: bool
     pleuritis: bool
 

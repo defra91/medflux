@@ -18,7 +18,7 @@ def map_parent(family_record: FamilyRecord) -> Parent:
 
     family_id = map_family_id(family_record.family_id)
     parental_role = map_parental_role(family_record.padre_madre)
-    mutation = map_str(family_record.mutazione)
+    mutation = map_str(family_record.mutazione.upper())
     recurrent_fever = map_boolean(family_record.febbre_ricorrente)
     temperature_category = map_temperature_category(family_record.t_max)
     episode_duration = map_episode_duration(family_record.durata)

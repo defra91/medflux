@@ -41,3 +41,11 @@ Istogramma non raggruppato, in cui le barre sono:
 - ...
 
 In sostanza, dobbiamo prendere la lista dei sintomi presenti in Parent e contare quante volte ciascun sintomo è presente tra i genitori con FMF.
+
+## Concorrenze fenotipiche
+
+Co-occorrenze fenotipiche tra probandi e genitori
+
+Istogramma a barre orizzontali in cui ciascuna barra corrisponde ad un sintomo e la lunghezza della barra rappresenta il numero di co-occorrenze tra probandi e genitori.
+
+Il probando è rappresentato dalla classe Child, mentre i genitori sono rappresentati dalla classe Parent.
