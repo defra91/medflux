@@ -157,5 +157,6 @@ def calculate_fmf_demographic_genotypic_stats(families: list[Family]) -> FMFDemo
         percentage_origin_foreign=percentage_origin_foreign,
         average_onset_age=average_onset_age,
         average_difference_diagnosis_onset=average_difference_diagnosis_onset,
+        count_biologic_therapy=with_biologic_therapy,
         percentage_biologic_theraphy=percentage_biologic_theraphy
     )

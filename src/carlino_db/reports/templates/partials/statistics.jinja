@@ -78,8 +78,9 @@
             <td class="text-end">{{ s.fmf_demographic_genotypic_stats.average_difference_diagnosis_onset | format_float }} anni</td>
           </tr>
           <tr>
-            <th>Percentuale di pazienti con terapia biologica</th>
-            <td colspan="2"></td>
+            <th>Pazienti con terapia biologica</th>
+            <td></td>
+            <td class="text-end">{{ s.fmf_demographic_genotypic_stats.count_biologic_therapy }}</td>
             <td class="text-end">{{ s.fmf_demographic_genotypic_stats.percentage_biologic_theraphy | format_float }}%</td>
           </tr>
         </tbody>

@@ -26,4 +26,5 @@ class FMFDemographicGenotypicStats:
 
     average_onset_age: float
     average_difference_diagnosis_onset: float
+    count_biologic_therapy: int
     percentage_biologic_theraphy: float
