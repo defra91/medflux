@@ -1,5 +1,7 @@
 import base64
+import re
 from io import BytesIO
+from pathlib import Path
 
 from ..charts import build_grouped_bar_chart, build_horizontal_bar_chart, build_pie_chart, build_vertical_bar_chart
 from ..domain.family import Family
@@ -19,6 +21,22 @@ def calculate_charts(families: list[Family]) -> list[StatisticsChart]:
         calculate_eurofever_mutations_pie_chart(families),
         calculate_heterozygous_mutations_pie_chart(families),
     ]
+
+
+def _chart_file_name(chart_title: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "_", chart_title.lower()).strip("_")
+    return f"{slug or 'chart'}.png"
+
+
+def _save_chart_image(chart_figure, chart_title: str) -> str:
+    repo_root = Path(__file__).resolve().parents[3]
+    output_dir = repo_root / "chart_images_results"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    file_name = _chart_file_name(chart_title)
+    file_path = output_dir / file_name
+    chart_figure.savefig(file_path, format="png", dpi=150, bbox_inches="tight")
+    return str(file_path)
 
 
 def _encode_chart_as_data_url(chart_figure) -> str:
@@ -79,6 +97,7 @@ def calculate_adult_onset_improvement_chart(families: list[Family]) -> Statistic
         colors=["#ca1103", "#69A74E"],
     )
 
+    _save_chart_image(figure, title)
     image_url = _encode_chart_as_data_url(figure)
 
     return StatisticsChart(
@@ -144,6 +163,7 @@ def calculate_parent_fmf_phenotype_chart(families: list[Family]) -> StatisticsCh
         rotation=60,
     )
 
+    _save_chart_image(figure, title)
     image_url = _encode_chart_as_data_url(figure)
 
     return StatisticsChart(
@@ -205,6 +225,7 @@ def calculate_phenotypic_concordance_chart(families: list[Family]) -> Statistics
         color="#b6d7a8",
     )
 
+    _save_chart_image(figure, title)
     image_url = _encode_chart_as_data_url(figure)
 
     return StatisticsChart(
@@ -226,6 +247,7 @@ def calculate_eurofever_mutations_pie_chart(families: list[Family]) -> Statistic
             labels=["Nessun dato"],
             values=[1.0]
         )
+        _save_chart_image(figure, "Distribuzione mutazioni Eurofever")
         image_url = _encode_chart_as_data_url(figure)
         return StatisticsChart(
             title="Distribuzione mutazioni Eurofever",
@@ -243,6 +265,7 @@ def calculate_eurofever_mutations_pie_chart(families: list[Family]) -> Statistic
         values=values,
     )
 
+    _save_chart_image(figure, title)
     image_url = _encode_chart_as_data_url(figure)
 
     return StatisticsChart(
@@ -264,6 +287,7 @@ def calculate_heterozygous_mutations_pie_chart(families: list[Family]) -> Statis
             labels=["Nessun dato"],
             values=[1.0]
         )
+        _save_chart_image(figure, "Distribuzione mutazioni eterozigoti")
         image_url = _encode_chart_as_data_url(figure)
         return StatisticsChart(
             title="Distribuzione mutazioni eterozigoti",
@@ -277,6 +301,7 @@ def calculate_heterozygous_mutations_pie_chart(families: list[Family]) -> Statis
     description = "Frequenza delle mutazioni eterozigoti tra i genitori."
 
     figure = build_pie_chart(labels=labels, values=values)
+    _save_chart_image(figure, title)
     image_url = _encode_chart_as_data_url(figure)
 
     return StatisticsChart(
