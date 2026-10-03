@@ -4,6 +4,7 @@ from io import BytesIO
 from ..charts import build_grouped_bar_chart, build_horizontal_bar_chart, build_pie_chart, build_vertical_bar_chart
 from ..domain.family import Family
 from .eurofever_calculator import extract_eurofever_mutations_frequency
+from .mutation_calculator import extract_heterozygous_mutation_frequency
 from .models.statistics_chart import StatisticsChart
 
 
@@ -16,6 +17,7 @@ def calculate_charts(families: list[Family]) -> list[StatisticsChart]:
         calculate_parent_fmf_phenotype_chart(families),
         calculate_phenotypic_concordance_chart(families),
         calculate_eurofever_mutations_pie_chart(families),
+        calculate_heterozygous_mutations_pie_chart(families),
     ]
 
 
@@ -244,6 +246,41 @@ def calculate_eurofever_mutations_pie_chart(families: list[Family]) -> Statistic
         title=title,
     )
 
+    image_url = _encode_chart_as_data_url(figure)
+
+    return StatisticsChart(
+        title=title,
+        description=description,
+        image_url=image_url,
+    )
+
+
+def calculate_heterozygous_mutations_pie_chart(families: list[Family]) -> StatisticsChart:
+    """
+    Build a pie chart from the frequencies of heterozygous mutations.
+    """
+
+    frequencies = extract_heterozygous_mutation_frequency(families)
+
+    if not frequencies:
+        figure = build_pie_chart(
+            labels=["Nessun dato"],
+            values=[1.0],
+            title="Distribuzione mutazioni eterozigoti",
+        )
+        image_url = _encode_chart_as_data_url(figure)
+        return StatisticsChart(
+            title="Distribuzione mutazioni eterozigoti",
+            description="Nessun dato disponibile per la distribuzione delle mutazioni eterozigoti.",
+            image_url=image_url,
+        )
+
+    labels = list(frequencies.keys())
+    values = [float(value) for value in frequencies.values()]
+    title = "Distribuzione mutazioni eterozigoti"
+    description = "Frequenza delle mutazioni eterozigoti tra i genitori."
+
+    figure = build_pie_chart(labels=labels, values=values, title=title)
     image_url = _encode_chart_as_data_url(figure)
 
     return StatisticsChart(
