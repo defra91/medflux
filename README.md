@@ -2,6 +2,8 @@
 
 Medflux is a Python tool for processing family clinical and genetic data and producing professional PDF reports and publication-ready charts. It provides a single CLI pipeline that transforms input data into a formatted report and exports charts as PNG files.
 
+This project is open-source and released under the MIT License. See the LICENSE file for details.
+
 Key features
 - End-to-end pipeline: read data, compute statistics, render HTML templates, and generate PDF reports.
 - Built-in statistical helpers for families, parents, children, and mutation-focused summaries.
@@ -71,4 +73,4 @@ Notes
 - SCSS styles are compiled as part of report generation and can be customized in `src/medflux/reports/`.
 
 License
-Add a LICENSE file to declare the project license if needed.
+This project is open-source and released under the MIT License. See the LICENSE file for details.
