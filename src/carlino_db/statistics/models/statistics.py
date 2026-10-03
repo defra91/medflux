@@ -5,6 +5,7 @@ from .family_stats import FamilyStats
 from .mutation_group_stats import MutationGroupStats
 from .parent_stats import ParentStats
 from .proband_stats import ProbandStats
+from .statistics_chart import StatisticsChart
 
 
 @dataclass
@@ -23,3 +24,5 @@ class Statistics:
     phenotype_distribution_by_mutation: dict[str, dict]
 
     concordance_by_mutation: list[dict]
+
+    charts: list[StatisticsChart]

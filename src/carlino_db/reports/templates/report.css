@@ -60,6 +60,11 @@ table {
 .symptom:last-child::after {
   content: ""; }
 
+.chart-container {
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px; }
+
 @page {
   size: AA;
   orientation: portrait;

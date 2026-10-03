@@ -1,4 +1,5 @@
 from ..domain.family import Family
+from .charts_calculator import calculate_charts
 from .concordance_calculations import compute_concordance_by_mutation
 from .family_calculations import compute_frequency_distribution, extract_mutations
 from .models.concordance_stats import ConcordanceStats
@@ -30,6 +31,8 @@ def calculate_statistics(families: list[Family]) -> Statistics:
 
     concordance_by_mutation = compute_concordance_by_mutation(families)
 
+    charts = calculate_charts(families)
+
     return Statistics(
         families=family_stats,
         probands=proband_stats,
@@ -41,6 +44,7 @@ def calculate_statistics(families: list[Family]) -> Statistics:
         parent_distribution=parent_distribution,
         phenotype_distribution_by_mutation=phenotype_distribution_by_mutation,
         concordance_by_mutation=concordance_by_mutation,
+        charts=charts,
     )
 
 
