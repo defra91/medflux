@@ -4,8 +4,8 @@ from io import BytesIO
 from ..charts import build_grouped_bar_chart, build_horizontal_bar_chart, build_pie_chart, build_vertical_bar_chart
 from ..domain.family import Family
 from .eurofever_calculator import extract_eurofever_mutations_frequency
-from .mutation_calculator import extract_heterozygous_mutation_frequency
 from .models.statistics_chart import StatisticsChart
+from .mutation_calculator import extract_heterozygous_mutation_frequency
 
 
 def calculate_charts(families: list[Family]) -> list[StatisticsChart]:
@@ -139,7 +139,6 @@ def calculate_parent_fmf_phenotype_chart(families: list[Family]) -> StatisticsCh
     figure = build_vertical_bar_chart(
         labels=labels,
         values=values,
-        title=title,
         xlabel="Sintomo",
         color="#6c9eeb",
         rotation=60,
@@ -225,8 +224,7 @@ def calculate_eurofever_mutations_pie_chart(families: list[Family]) -> Statistic
     if not frequencies:
         figure = build_pie_chart(
             labels=["Nessun dato"],
-            values=[1.0],
-            title="Distribuzione mutazioni Eurofever",
+            values=[1.0]
         )
         image_url = _encode_chart_as_data_url(figure)
         return StatisticsChart(
@@ -243,7 +241,6 @@ def calculate_eurofever_mutations_pie_chart(families: list[Family]) -> Statistic
     figure = build_pie_chart(
         labels=labels,
         values=values,
-        title=title,
     )
 
     image_url = _encode_chart_as_data_url(figure)
@@ -265,8 +262,7 @@ def calculate_heterozygous_mutations_pie_chart(families: list[Family]) -> Statis
     if not frequencies:
         figure = build_pie_chart(
             labels=["Nessun dato"],
-            values=[1.0],
-            title="Distribuzione mutazioni eterozigoti",
+            values=[1.0]
         )
         image_url = _encode_chart_as_data_url(figure)
         return StatisticsChart(
@@ -280,7 +276,7 @@ def calculate_heterozygous_mutations_pie_chart(families: list[Family]) -> Statis
     title = "Distribuzione mutazioni eterozigoti"
     description = "Frequenza delle mutazioni eterozigoti tra i genitori."
 
-    figure = build_pie_chart(labels=labels, values=values, title=title)
+    figure = build_pie_chart(labels=labels, values=values)
     image_url = _encode_chart_as_data_url(figure)
 
     return StatisticsChart(

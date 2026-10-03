@@ -27,7 +27,7 @@ def satisfies_eurofever(parent: Parent) -> bool:
     # Regola Eurofever/PRINTO
     has_pathogenic_mut = parent.mutation in pathogenic_mutations
 
-    return (num_clinical >= 1 and has_pathogenic_mut) or (num_clinical >= 2)
+    return has_pathogenic_mut and num_clinical >= 2
 
 
 def extract_eurofever_mutations_frequency(families: list[Family]) -> dict[str, float]:
@@ -36,7 +36,7 @@ def extract_eurofever_mutations_frequency(families: list[Family]) -> dict[str, f
 
     for family in families:
         for parent in family.parents():
-            if parent.mutation:          # ignora mutazioni vuote
+            if parent.mutation and satisfies_eurofever(parent):
                 mutations.append(parent.mutation)
 
     # Se non ci sono genitori con mutazione, evita divisioni per zero

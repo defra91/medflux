@@ -1,15 +1,10 @@
 .chart-container {
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
 
-  margin-bottom: 8px;
-  margin-top: 8px;
+  border-bottom: 1px solid #ccc;
 
-  .chart-image-container {
-    margin-left: auto;
-    margin-right: auto;
-
-    width: 300px;
+  &:last-child {
+    border-bottom: none;
   }
 }

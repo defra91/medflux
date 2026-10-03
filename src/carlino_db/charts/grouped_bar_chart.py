@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
@@ -16,7 +16,7 @@ class GroupedBarChart(BaseChart):
         self,
         labels: Sequence[str],
         series: Sequence[tuple[str, Sequence[float]]],
-        title: str = "Grouped bar chart",
+        title: str | None = None,
         *,
         xlabel: str | None = None,
         ylabel: str | None = None,
@@ -79,7 +79,7 @@ class GroupedBarChart(BaseChart):
 def build_grouped_bar_chart(
     labels: Sequence[str],
     series: Sequence[tuple[str, Sequence[float]]],
-    title: str = "Grouped bar chart",
+    title: str | None = None,
     *,
     xlabel: str | None = None,
     ylabel: str | None = None,
@@ -92,7 +92,7 @@ def save_grouped_bar_chart(
     labels: Sequence[str],
     series: Sequence[tuple[str, Sequence[float]]],
     output_path: str | Path,
-    title: str = "Grouped bar chart",
+    title: str | None = None,
     *,
     xlabel: str | None = None,
     ylabel: str | None = None,
