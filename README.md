@@ -1,4 +1,4 @@
-# Carlino DB
+# MedFlux
 
 Questo progetto contiene un pipeline per la generazione di report e, ora, anche API dedicate per la costruzione e il salvataggio di grafici.
 
