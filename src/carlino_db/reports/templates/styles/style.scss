@@ -3,77 +3,202 @@
 @import "tables";
 @import "charts";
 
+:root {
+  --thesis-ink: #1f2937;
+  --thesis-muted: #58616d;
+  --thesis-line: #d9e0e7;
+  --thesis-panel: #f7f9fb;
+  --thesis-accent: #1d4f91;
+  --thesis-accent-soft: #eaf2ff;
+  --thesis-shadow: rgba(15, 23, 42, 0.08);
+}
+
 @page {
-  size: AA;
+  size: A4;
   orientation: portrait;
   margin-top: 1.5cm;
   margin-bottom: 1.5cm;
-  margin-left: 1.5cm;
-  margin-right: 1.5cm;
-
+  margin-left: 1.8cm;
+  margin-right: 1.8cm;
 
   @bottom-right {
     content: counter(page) " / " counter(pages);
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 9pt;
-    color: #555555;
+    color: var(--thesis-muted);
   }
 }
 
-body {
-  color: #222;
-  margin: 0;
-  padding: 0;
-}
-
-.report-subtitle {
-  font-size: 12px;
-  color: #666;
-  font-weight: 600;
-  font-style: italic;
-}
-
-.created-at {
-  font-size: 8px;
-  color: #777;
-  margin-bottom: 30px;
-}
-
-.family-block {
-  margin-bottom: 35px;
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.family-block h2 {
-  text-align: right;
-  font-size: 16px;
-  margin-top: 0;
-}
-
-.family-block h3 {
+html {
   font-size: 14px;
 }
 
-.section {
-  margin-bottom: 12px;
+body {
+  color: var(--thesis-ink);
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
 }
 
-.label {
+.report-shell {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.report-header {
+  padding: 0.6cm 0 0.8cm 0;
+}
+
+.report-header__row {
+  display: block;
+}
+
+.report-header__title-block {
+  margin-bottom: 0.5cm;
+}
+
+.eyebrow {
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--thesis-accent);
+  margin-bottom: 0.35cm;
+}
+
+.report-title {
+  margin: 0;
+  font-size: 24pt;
+  line-height: 1.2;
+  color: var(--thesis-ink);
+  font-weight: 700;
+}
+
+.report-subtitle {
+  margin-top: 0.25cm;
+  font-size: 11pt;
+  color: var(--thesis-muted);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.report-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.18cm;
+  margin-top: 0.6cm;
+  padding: 0.45cm 0.55cm;
+  border: 1px solid var(--thesis-line);
+  border-radius: 8px;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6cm;
+  font-size: 9.5pt;
+}
+
+.meta-label {
+  color: var(--thesis-muted);
   font-weight: 600;
 }
 
+.meta-value {
+  color: var(--thesis-ink);
+  font-weight: 700;
+}
+
+.report-section {
+  margin-bottom: 1.2cm;
+}
+
+.section-heading {
+  margin: 0 0 0.45cm 0;
+  font-size: 14pt;
+  color: var(--thesis-ink);
+  font-weight: 700;
+  padding-bottom: 0.1cm;
+  border-bottom: 1px solid var(--thesis-line);
+}
+
+.family-block {
+  margin-bottom: 0.7cm;
+  padding: 0.55cm 0.6cm 0.5cm 0.6cm;
+  border: 1px solid var(--thesis-line);
+  border-left: 4px solid var(--thesis-accent);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.family-block h2 {
+  text-align: left;
+  font-size: 13pt;
+  margin: 0 0 0.2cm 0;
+  color: var(--thesis-accent);
+  font-weight: 700;
+}
+
+.family-block h3 {
+  font-size: 11pt;
+  margin: 0.25cm 0 0.15cm 0;
+  color: var(--thesis-ink);
+}
+
+.section {
+  margin-bottom: 0.4cm;
+}
+
+.label {
+  font-weight: 700;
+  color: var(--thesis-ink);
+}
+
 ul {
-  margin-top: 6px;
-  margin-bottom: 6px;
+  margin-top: 0.15cm;
+  margin-bottom: 0.2cm;
+  padding-left: 1.1rem;
 }
 
 li {
-  margin-bottom: 4px;
+  margin-bottom: 0.08cm;
 }
 
 .empty {
-  color: #999;
+  color: var(--thesis-muted);
   font-style: italic;
+}
+
+.chart-container {
+  margin-bottom: 0.8cm;
+  padding-top: 0.3cm;
+}
+
+.chart-container .row {
+  align-items: center;
+}
+
+.chart-container h4 {
+  font-size: 12pt;
+  margin-bottom: 0.15cm;
+  color: var(--thesis-ink);
+}
+
+.chart-container p {
+  font-size: 9.5pt;
+  color: var(--thesis-muted);
+  margin-bottom: 0.35cm;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--thesis-line);
+  border-radius: 6px;
+  background: #fff;
 }

@@ -1,24 +1,17 @@
 {% macro render_statistics_charts(s) %}
-  <h3>Charts</h3>
-
   {% for chart in s.charts %}
     <div class="chart-container">
-      <div class="row">
-        <div class="col-6">
-          <h4>{{ chart.title }}</h4>
+      <h4>{{ chart.title }}</h4>
 
-          {% if chart.description %}
-            <p>{{ chart.description }}</p>
-          {% endif %}
+      {% if chart.description %}
+        <p>{{ chart.description }}</p>
+      {% endif %}
+
+      {% if chart.image_url %}
+        <div class="img-container">
+          <img class="img-fluid" src="{{ chart.image_url }}" alt="{{ chart.title }}">
         </div>
-
-        <div class="col-6">
-          {% if chart.image_url %}
-            <img class="img-fluid" src="{{ chart.image_url }}" alt="{{ chart.title }}">
-          {% endif %}
-        </div>
-
-      </div>
+      {% endif %}
     </div>
   {% endfor %}
 

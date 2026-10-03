@@ -13,8 +13,8 @@ from .view_models.report_viewmodel_builder import build_report_viewmodel
 
 
 def _build_report_viewmodel(families, statistics, target: str):
-    title = "Familial Genetic Assessment Report"
-    subtitle = "Analysis of Mutations, Phenotypes, and Familial Relationships"
+    title = "Rapporto di valutazione genetica familiare"
+    subtitle = "Analisi delle mutazioni, dei fenotipi e delle relazioni familiari"
     version = "1.0"
     author = "Mariagrazia Carlino"
 

@@ -4,7 +4,7 @@
 {% import "partials/family_registry.jinja" as family_registry_template %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="UTF-8">
@@ -14,69 +14,63 @@
   <link rel="stylesheet" href="{{ style }}">
   {% endfor %}
 
-  <link rel="stylesheet" href="bootstrap.min.css">
-  <link rel="stylesheet" href="report.css">
-
-  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
-
   <title>{{ vm.title }}</title>
 </head>
 
 <body>
-  <div class="report-header mb-4">
-    <div class="row">
+  <div class="report-shell">
+    <header class="report-header">
+      <div class="report-header__row">
+        <div class="report-header__title-block">
+          <h1 class="report-title">{{ vm.title }}</h1>
+          {% if vm.subtitle %}
+          <div class="report-subtitle">{{ vm.subtitle }}</div>
+          {% endif %}
+        </div>
 
-      <!-- Left side: Title -->
-      <div class="col-8">
-        <h1 class="report-title">{{ vm.title }}</h1>
+        <aside class="report-meta">
+          <div class="meta-item">
+            <span class="meta-label">Versione</span>
+            <span class="meta-value">{{ vm.version }}</span>
+          </div>
 
-        {% if vm.subtitle %}
-        <div class="report-subtitle">{{ vm.subtitle }}</div>
-        {% endif %}
+          <div class="meta-item">
+            <span class="meta-label">Autore</span>
+            <span class="meta-value">{{ vm.author }}</span>
+          </div>
+
+          {% if vm.created_at %}
+          <div class="meta-item">
+            <span class="meta-label">Data</span>
+            <span class="meta-value">{{ vm.created_at.strftime("%Y-%m-%d") }}</span>
+          </div>
+          {% endif %}
+
+          <div class="meta-item">
+            <span class="meta-label">Famiglie</span>
+            <span class="meta-value">{{ vm.total_families }}</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Probandi</span>
+            <span class="meta-value">{{ vm.total_children }}</span>
+          </div>
+        </aside>
       </div>
+    </header>
 
-      <!-- Right side: Metadata -->
-      <div class="col-4 text-end report-meta">
+    {% if vm.statistics %}
+    <section class="report-section">
+      <h2 class="section-heading">Metriche aggregate cliniche e genetiche</h2>
+      {{ statistics_template.render_statistics(vm.statistics) }}
+    </section>
+    {% endif %}
 
-        <div class="meta-item">
-          <label>Version:</label>
-          <span class="meta-value">{{ vm.version }}</span>
-        </div>
-
-        <div class="meta-item">
-          <label>Author:</label>
-          <span class="meta-value">{{ vm.author }}</span>
-        </div>
-
-        {% if vm.created_at %}
-        <div class="meta-item">
-          <label>Date:</label>
-          <span class="meta-value">{{ vm.created_at.strftime("%Y-%m-%d %H:%M") }}</span>
-        </div>
-        {% endif %}
-
-        <div class="meta-item">
-          <label>Total families:</label>
-          <span class="meta-value">{{ vm.total_families }}</span>
-        </div>
-
-        <div class="meta-item">
-          <label>Total children:</label>
-          <span class="meta-value">{{ vm.total_children }}</span>
-        </div>
-
-      </div>
-    </div>
+    <section class="report-section">
+      <h2 class="section-heading">Registro famiglie</h2>
+      {{ family_registry_template.render_family_registry(vm.families) }}
+    </section>
   </div>
-
-  {% if vm.statistics %}
-  <h2>Aggregate Clinical and Genetic Metrics</h2>
-  {{ statistics_template.render_statistics(vm.statistics) }}
-  {% endif %}
-
-  <h2>Family Registry</h2>
-  {{ family_registry_template.render_family_registry(vm.families) }}
-
 </body>
 
 </html>
